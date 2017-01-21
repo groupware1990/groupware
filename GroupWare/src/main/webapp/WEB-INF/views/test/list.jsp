@@ -18,27 +18,36 @@
 			text : "text"
 		}
 		
-		$.ajax({
-		    url: "/test/console",
-		    dataType: "json",
-		    type: "POST",
-		    data : JSON.stringify(params),
-		    contentType: "application/json; charset=utf-8",
-		    beforeSend : function() {
-		    },
-		    success: function(data) {
-		    	console.log(data);
-		    },
-		    error: function(request, status, error) {
-		    	alert("list search fail :: error code: " + request.status + "\n" + "error message: " + error + "\n");
-		    }
-		});	
+		function test() {
+			$.ajax({
+			    url: "/test/console",
+			    dataType: "json",
+			    type: "POST",
+			    data : JSON.stringify(params),
+			    contentType: "application/json; charset=utf-8",
+			    beforeSend : function() {
+			    },
+			    success: function(data) {
+			    	console.log(data);
+			    },
+			    error: function(request, status, error) {
+			    	alert("list search fail :: error code: " + request.status + "\n" + "error message: " + error + "\n");
+			    }
+			});	
+		}
+			
+		$("div").click(function() {
+			test();
+		});
 
 	});
 </script>
 </head>
 <body>
 
+<div> <c:import url="../include/footer.jsp" /> </div>
+<div> hi </div>
+<div> hello </div>
 
 
 </body>
