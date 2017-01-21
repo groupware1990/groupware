@@ -25,7 +25,7 @@ public class OfficerController {
 	private TestService service;
 
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
-	public void list() throws Exception {
+	public void index() throws Exception {
 
 		logger.info("-------------start index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 

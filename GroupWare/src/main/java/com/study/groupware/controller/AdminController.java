@@ -28,7 +28,7 @@ public class AdminController {
 	private TestService service;
 
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
-	public void list(HttpServletRequest request) throws Exception {
+	public void index(HttpServletRequest request) throws Exception {
 
 		logger.info("-------------start index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 
