@@ -23,7 +23,7 @@
 		    dataType: "json",
 		    type: "POST",
 		    data : JSON.stringify(params),
-		    contentType: "application/json; charset=euc-kr",
+		    contentType: "application/json; charset=utf-8",
 		    beforeSend : function() {
 		    },
 		    success: function(data) {
