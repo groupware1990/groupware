@@ -1,16 +1,20 @@
 package com.study.groupware.controller;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import com.study.groupware.service.TestService;
 
@@ -24,20 +28,19 @@ public class AdminController {
 	private TestService service;
 
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
-	public void list() throws Exception {
+	public void list(HttpServletRequest request) throws Exception {
 
-		logger.info("-------------start index");
+		logger.info("-------------start index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		
 		try {
-
-
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 
-		logger.info("---------------end index");
+		logger.info("---------------end index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 	}
 	
 	@ResponseBody

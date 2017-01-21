@@ -1,5 +1,6 @@
 package com.study.groupware.controller;
 
+import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class OfficerController {
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
 	public void list() throws Exception {
 
-		logger.info("-------------start index");
+		logger.info("-------------start index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -37,7 +38,7 @@ public class OfficerController {
 			e.printStackTrace();
 		}
 
-		logger.info("---------------end index");
+		logger.info("---------------end index [" + InetAddress.getLocalHost().getHostAddress() + "]");
 	}
 	
 	@ResponseBody
