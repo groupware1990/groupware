@@ -15,7 +15,7 @@ public class ErrorController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
-	@RequestMapping(value = "/test", method = { RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/404", method = { RequestMethod.GET, RequestMethod.POST})
 	public void test(HttpServletRequest request) throws Exception {
 
 		logger.info("-------------start 404 [" + InetAddress.getLocalHost().getHostAddress() + "]");
