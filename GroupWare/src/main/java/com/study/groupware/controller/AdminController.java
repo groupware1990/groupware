@@ -23,10 +23,10 @@ public class AdminController {
 	@Inject
 	private TestService service;
 
-	@RequestMapping(value = "/list", method = { RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
 	public void list() throws Exception {
 
-		logger.info("-------------start list");
+		logger.info("-------------start index");
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -37,7 +37,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 
-		logger.info("----------------end list");
+		logger.info("---------------end index");
 	}
 	
 	@ResponseBody
