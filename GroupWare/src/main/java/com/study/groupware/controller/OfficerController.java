@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.study.groupware.service.TestService;
 
 @Controller
-@RequestMapping("/test/*")
-public class TestController {
+@RequestMapping("/officer/*")
+public class OfficerController {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestController.class);
+	private static final Logger logger = LoggerFactory.getLogger(OfficerController.class);
 
 	@Inject
 	private TestService service;
