@@ -27,7 +27,7 @@ public class OfficerController {
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST})
 	public void index() throws Exception {
 
-		logger.info("-------------start index [" + InetAddress.getLocalHost().getHostAddress() + "]");
+		logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -38,7 +38,7 @@ public class OfficerController {
 			e.printStackTrace();
 		}
 
-		logger.info("---------------end index [" + InetAddress.getLocalHost().getHostAddress() + "]");
+		logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 	}
 	
 	@ResponseBody
