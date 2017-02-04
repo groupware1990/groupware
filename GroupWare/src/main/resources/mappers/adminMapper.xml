@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.groupware.adminMapper">
+
+	<select id="officerList" parameterType="Map" resultType="Map">
+		SELECT  STF.STF_SQ,
+				STF.STF_PT_RT, 
+				STF.STF_NM, 
+				RNK.RNK_NM, 
+				DD.DPT_NM, 
+				ADMN.ADMN_PW, 
+				STF.STF_PH, 
+				STF.STF_BS_PH, 
+				STF.STF_EML
+		FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+		WHERE ADMN.ADMN_SQ = STF.ADMN_SQ
+		AND RNK.RNK_SQ = STF.RNK_SQ
+		AND DD.DPT_SQ = STF.DPT_SQ
+		
+		<choose>
+			<when test="cate == 1">
+				AND STF.STF_NM LIKE #{keyword} || '%'
+			</when>
+			<when test="cate == 2">
+				AND RNK.RNK_NM LIKE #{keyword} || '%'
+			</when>
+			<when test="cate == 3">
+				AND DD.DPT_NM LIKE #{keyword} || '%'
+			</when>
+			<otherwise>
+
+			</otherwise>
+		</choose>
+		
+		ORDER BY RNK.RNK_SQ DESC
+	</select>
+
+	<select id="officerListCount" parameterType="Map" resultType="Map">
+		SELECT COUNT(*) AS COUNT
+		FROM STF_TB STF, ADMN_TB ADMN, RNK_TB RNK, DPT_DIV_TB DD
+		WHERE ADMN.ADMN_SQ = STF.ADMN_SQ
+		AND RNK.RNK_SQ = STF.RNK_SQ
+		AND DD.DPT_SQ = STF.DPT_SQ
+		
+		<choose>
+			<when test="cate == 1">
+				AND STF.STF_NM LIKE #{keyword} || '%'
+			</when>
+			<when test="cate == 2">
+				AND RNK.RNK_NM LIKE #{keyword} || '%'
+			</when>
+			<when test="cate == 3">
+				AND DD.DPT_NM LIKE #{keyword} || '%'
+			</when>
+			<otherwise>
+
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectAdmn_Tb" parameterType="Map" resultType="Map">
+		SELECT ADMN_SQ, ADMN_PW
+		FROM ADMN_TB
+	</select>
+	
+	<select id="selectRnk_Tb" parameterType="Map" resultType="Map">
+		SELECT RNK_SQ, RNK_NM
+		FROM RNK_TB
+	</select>
+	
+	<select id="selectDpt_Div_Tb" parameterType="Map" resultType="Map">
+		SELECT DPT_SQ, DPT_NM
+		FROM DPT_DIV_TB
+	</select>
+
+
+</mapper>
