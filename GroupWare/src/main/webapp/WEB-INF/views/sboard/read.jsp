@@ -39,7 +39,9 @@ font-size : 120%}
 
 
 		<!-- nav 시작 -->
-		
+		<div>
+			<c:import url="../import/nav_admin.jsp" />
+		</div>
 		<!-- nav 종료 -->
 
 

@@ -40,6 +40,9 @@
 
 
 		<!-- nav 시작 -->
+		<div>
+			<c:import url="../import/nav_admin.jsp" />
+		</div>
 		
 		<!-- nav 종료 -->
 
@@ -48,9 +51,8 @@
 
 	
 
-	<form role="form" method="post" id="frm">
+	<form role="form" method="post" id="frm" action="/sboard/register">
 	<div class ="box-body">
-		
 		<input type="text" name='ntc_nm' class="form-control" placeholder="제목을 입력해 주세요.">
         <textarea name="ntc_cnt" id="ntc_cnt" rows="10" cols="100"></textarea>
         <input type="text" name='stf_sq' class="form-control" placeholder="사원번호">
@@ -58,7 +60,7 @@
 	</div>
 
    <div class="box-footer">
-		<button type="submit" class="btn btn-primary">확인</button>
+		<button type="button" id="okbutton" class="btn btn-primary">확인</button>
 		<button id="cancel" type="button" class="btn btn-danger">취소</button>
    </div>
 		<!-- content 종료 -->
@@ -90,25 +92,18 @@ nhn.husky.EZCreator.createInIFrame({
     oAppRef: oEditors,
     elPlaceHolder: "ntc_cnt",
     sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-    tParams : {
-    	  // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-        bUseToolbar : true,             
-        // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-        bUseVerticalResizer : true,     
-        // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-        bUseModeChanger : true, }
+    fCreator: "createSEditor2"
 });
 //전송버튼 클릭이벤트
-$("#submit").click(function(){
+$("#okbutton").click(function(){
+
     //id가 smarteditor인 textarea에 에디터에서 대입
    oEditors.getById["ntc_cnt"].exec("UPDATE_CONTENTS_FIELD", []);
-     
-    //폼 submit
-    $("#frm").submit();
+   
+   //폼 submit
+   $("#frm").submit();
 })
-  function getContextPath() {
-    return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
-    }
+ 
 
 </script>
 

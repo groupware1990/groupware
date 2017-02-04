@@ -48,22 +48,74 @@ float:right;}
 
 
 		<!-- nav 시작 -->
-		
+		<div>
+			<c:import url="../import/nav_admin.jsp" />
+		</div>
 		<!-- nav 종료 -->
 
 		
+		
+			<div class="modal fade" id="insertModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">결재등록</h4>
+					</div>
+					<div class="modal-body">
+						
+						<table class="table table-striped table-bordered">
+					
+							<thead>
+							</thead>
+							<tbody>
+								<tr>
+									<th class="text-center">결재파일 업로드
+										<img src="/resources/img/user.png">
+										<input type="file" class="form-control">
+									</th>
+									<td><input type="text" class="form-control" placeholder="이름"></td>
+								</tr>
+								<tr>
+									<th>제목(*)</th>
+									<td><input type="text" id="apv_nm" class="form-control" placeholder="제목"></td>
+								</tr>
+								<tr>
+									<th>결재구분(*)</th>
+									<td><select id="div_apv_sq" class="form-control" name="div_apv_sq">
+									       <option value="1">업무</option>
+									       <option value="2">파견</option>
+									       <option value="3">경비지출</option>
+									       <option value="4">초과근무</option>
+									       <option value="5">휴가</option>
+								        </select>
+								    </td>
+								</tr>
+							</tbody>
+						</table>
+					            <tr>
+									<th>사원번호(*)</th>
+									<td><input type="text" id="stf_sq" class="form-control" placeholder="사원번호"></td>
+								</tr>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">입력</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
 		<div class="content">
 	
-			</div>
-	<div class="row">
-		<!-- left column -->	
-
 
 		<div class="col-md-12">
 			
-	 <div class='box'>
-
-     </div>
+	        <div id="title">
+				<h3>결재목록</h3>
+			</div>
 
 			<div class="box">
 			<h3 class="box-title">결재</h3>
@@ -71,6 +123,26 @@ float:right;}
 						<button id='newBtn'>등록</button>
 				</div>
 				<div class="box-body">
+					
+					<table id="officerList" class="table table-hover">
+								<colgroup>
+									<col width="10%" />
+									<col width="60%" />
+									<col width="10%" />
+									<col width="10%" />
+									<col width="10%" />
+									
+								</colgroup>
+								<thead>
+									<tr class="active">
+										<th>번호</th>
+										<th>제출자</th>
+										<th>결재구분</th>
+										<th>진행상황</th>
+										<th>조직</th>
+									
+									</tr>
+								</thead>
 					
 					<table class="table table-bordered">
 						<tr>

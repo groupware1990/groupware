@@ -1,13 +1,14 @@
 package com.study.groupware.daoimpl;
 
 import java.util.List;
+
 import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
 import com.study.groupware.dao.BoardDAO;
 import com.study.groupware.vo.BoardVO;
-import com.study.groupware.vo.Criteria;
-import com.study.groupware.vo.SearchCriteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {

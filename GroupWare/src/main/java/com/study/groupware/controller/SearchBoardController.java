@@ -1,13 +1,11 @@
 package com.study.groupware.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.study.groupware.service.BoardService;
 import com.study.groupware.vo.BoardVO;
-import com.study.groupware.vo.SearchCriteria;
 
 @Controller
 @RequestMapping("/sboard/*")
@@ -55,7 +52,7 @@ public class SearchBoardController {
 	}
 
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
-	public void modifyPagingGET(String ntc_sq, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public void modifyPagingGET(String ntc_sq, Model model) throws Exception {
 
 		model.addAttribute(service.read(ntc_sq));
 	}
@@ -66,11 +63,6 @@ public class SearchBoardController {
 		logger.info(toString());
 		service.modify(board);
 
-		/* rttr.addAttribute("page", cri.getPage());
-    rttr.addAttribute("perPageNum", cri.getPerPageNum());
-    rttr.addAttribute("searchType", cri.getSearchType());
-    rttr.addAttribute("keyword", cri.getKeyword());
-		 */
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		logger.info(rttr.toString());

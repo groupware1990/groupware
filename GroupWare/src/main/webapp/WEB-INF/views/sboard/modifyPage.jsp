@@ -34,34 +34,42 @@ margin: auto; /* 화면 중앙에 배치*/
 </style>
 </head>
 <body>
-	<form>
+	
 		<div id="wrap">
 
 			<div>
 				<c:import url="../import/header_officer.jsp" />
 			</div>
 
+            <div>
+			    <c:import url="../import/nav_admin.jsp" />
+		    </div>
+		
+		<form role="form" method="post" id="frm" action="/sboard/modifyPage">
+		         <input type='hidden' name='ntc_sq' value="${boardVO.ntc_sq}"> 
+			     <input type='hidden' name='ntc_div_sq' value="${boardVO.ntc_div_sq}"> 
+					
 			<div id="content">
 				<input type='hidden' name='ntc_sq' value="${boardVO.ntc_sq}">
-				<input type='hidden' name="ntc_div_sq" id="ntc_cnt" value="${boardVO.ntc_div_sq}">
+				<input type='hidden' name="ntc_div_sq" id="ntc_div_sq" value="${boardVO.ntc_div_sq}">
 
 				<div class="box-body">
 					<div class="form-group">
 						<input type="text" name='ntc_nm' class="form-control" value="${boardVO.ntc_nm}">
 					</div>
 					<div class="form-group">
-						<textarea name="ntc_cnt" id="ntc_cnt" rows="10" cols="100">${boardVO.ntc_cnt}</textarea>
+					<textarea name="ntc_cnt" id="ntc_cnt" rows="10" cols="100">${boardVO.ntc_cnt}</textarea>
 					</div>
 				</div>
 			</div>
-		</div>
-	</form>
-	<div class="box-footer">
-		<button type="submit" class="btn btn-primary">확인</button>
-		<button id="cancel" type="button" class="btn btn-danger">취소</button>
-	</div>
+	
 
+	       <div class="box-footer">
+		       <button type="button" id="okbutton" class="btn btn-primary">확인</button>
+		       <button id="cancel" type="button" class="btn btn-danger">취소</button>
+	       </div>
 
+       </form>
 
 
 	<!-- footer 시작 -->
@@ -69,7 +77,7 @@ margin: auto; /* 화면 중앙에 배치*/
 		<c:import url="../import/footer.jsp" />
 	</div>
 	<!-- footer 종료 -->
-
+</div>
 </body>
 <script>
 	var result = '${msg}';
@@ -90,30 +98,24 @@ margin: auto; /* 화면 중앙에 배치*/
 	});
 </script>
 
-
 <script>
-	$(document)
-			.ready(
-					function() {
+$("#okbutton").click(function(){
 
-						var formObj = $("form[role='form']");
-
-						console.log(formObj);
-
-						$(".btn-warning")
-								.on(
-										"click",
-										function() {
-											self.location = "/member/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
-													+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
-										});
-
-						$(".btn-primary").on("click", function() {
-							formObj.submit();
-						});
-					});
+    //id가 smarteditor인 textarea에 에디터에서 대입
+   oEditors.getById["ntc_cnt"].exec("UPDATE_CONTENTS_FIELD", []);
+   
+   //폼 submit
+   $("#frm").submit();
+})
 </script>
 
+<script type="text/javascript">
+    	$(document).ready(function() {
+			$("#cancel").click(function() {
+				location.href="/sboard/list?ntc_div_sq=1";
+			});
+		});
+    </script>
 
 </html>
 

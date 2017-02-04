@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.study.groupware.dao.BoardDAO;
 import com.study.groupware.service.BoardService;
 import com.study.groupware.vo.BoardVO;
-import com.study.groupware.vo.Criteria;
-import com.study.groupware.vo.SearchCriteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
