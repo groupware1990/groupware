@@ -1,118 +1,107 @@
 package com.study.groupware.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.study.groupware.service.BoardService;
+import com.study.groupware.vo.BoardVO;
+import com.study.groupware.vo.SearchCriteria;
 
 @Controller
 @RequestMapping("/sboard/*")
 public class SearchBoardController {
-	/*
-  private static final Logger logger = LoggerFactory.getLogger(SearchBoardController.class);
 
-  @Inject
-  private BoardService service;
+	private static final Logger logger = LoggerFactory.getLogger(SearchBoardController.class);
 
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
-  public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	@Inject
+	private BoardService service;
 
-    logger.info(cri.toString());
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void listAll(@RequestParam int ntc_div_sq, Model model) throws Exception {
 
-    // model.addAttribute("list", service.listCriteria(cri));
-    model.addAttribute("list", service.listSearchCriteria(cri));
 
-    PageMaker pageMaker = new PageMaker();
-    pageMaker.setCri(cri);
+		logger.info(toString());
 
-    // pageMaker.setTotalCount(service.listCountCriteria(cri));
-    pageMaker.setTotalCount(service.listSearchCount(cri));
+		model.addAttribute("list", service.listAll(ntc_div_sq));  //model 을 이용해서 모든 게시물을 jsp로 전송
 
-    model.addAttribute("pageMaker", pageMaker);
-  }
+	}
 
-  @RequestMapping(value = "/readPage", method = RequestMethod.GET)
-  public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
-      throws Exception {
 
-    model.addAttribute(service.read(bno));
-  }
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("ntc_sq") String ntc_sq , Model model)
+			throws Exception {
 
-  @RequestMapping(value = "/removePage", method = RequestMethod.POST)
-  public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+		model.addAttribute(service.read(ntc_sq));
+	}
 
-    service.remove(bno);
+	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
+	public String remove(@RequestParam("ntc_sq") String ntc_sq, RedirectAttributes rttr) throws Exception {
 
-    rttr.addAttribute("page", cri.getPage());
+		service.remove(ntc_sq);
+
+		rttr.addFlashAttribute("msg", "SUCCESS");
+
+		return "redirect:/sboard/list";
+	}
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
+	public void modifyPagingGET(String ntc_sq, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+
+		model.addAttribute(service.read(ntc_sq));
+	}
+
+	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
+	public String modifyPagingPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+
+		logger.info(toString());
+		service.modify(board);
+
+		/* rttr.addAttribute("page", cri.getPage());
     rttr.addAttribute("perPageNum", cri.getPerPageNum());
     rttr.addAttribute("searchType", cri.getSearchType());
     rttr.addAttribute("keyword", cri.getKeyword());
+		 */
+		rttr.addFlashAttribute("msg", "SUCCESS");
 
-    rttr.addFlashAttribute("msg", "SUCCESS");
+		logger.info(rttr.toString());
 
-    return "redirect:/sboard/list";
-  }
+		return "redirect:/sboard/list";
+	}
 
-  @RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
-  public void modifyPagingGET(int bno, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public void registGET() throws Exception {
 
-    model.addAttribute(service.read(bno));
-  }
+		logger.info("regist get ...........");
+	}
 
-  @RequestMapping(value = "/modifyPage", method = RequestMethod.POST)
-  public String modifyPagingPOST(BoardVO board, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String registPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
 
-    logger.info(cri.toString());
-    service.modify(board);
+		logger.info("regist post ...........");
+		logger.info(board.toString());
 
-    rttr.addAttribute("page", cri.getPage());
-    rttr.addAttribute("perPageNum", cri.getPerPageNum());
-    rttr.addAttribute("searchType", cri.getSearchType());
-    rttr.addAttribute("keyword", cri.getKeyword());
+		service.regist(board);
 
-    rttr.addFlashAttribute("msg", "SUCCESS");
-
-    logger.info(rttr.toString());
-
-    return "redirect:/sboard/list";
-  }
-
-  @RequestMapping(value = "/register", method = RequestMethod.GET)
-  public void registGET() throws Exception {
-
-    logger.info("regist get ...........");
-  }
-
-  @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public String registPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
-
-    logger.info("regist post ...........");
-    logger.info(board.toString());
-
-    service.regist(board);
-
-    rttr.addFlashAttribute("msg", "SUCCESS");
-
-    return "redirect:/sboard/list";
-  }
+		rttr.addFlashAttribute("msg", "SUCCESS");
 
 
-  @RequestMapping("/getAttach/{bno}")
-  @ResponseBody
-  public List<String> getAttach(@PathVariable("bno")Integer bno)throws Exception{
+		return "redirect:/sboard/list?ntc_div_sq=1";
+	}
 
-    return service.getAttach(bno);
-  }  
-	 */
+
+
+
+
+
+
 }

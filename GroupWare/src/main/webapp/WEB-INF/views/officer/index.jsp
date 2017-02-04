@@ -14,25 +14,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-/* Remove the navbar's default rounded borders and increase the bottom margin */
-.navbar {
-	margin-bottom: 50px;
-	border-radius: 0;
-}
 
-/* Remove the jumbotron's default bottom margin */
-.jumbotron {
-	margin-bottom: 0;
-}
-
-/* Add a gray background color and some padding to the footer */
-#footer {
-	margin-top: 50px;
-	background-color: #f2f2f2;
-	padding: 25px;
-}
-</style>
 
 </head>
 <body>
@@ -45,74 +27,7 @@
 
 
 		<!-- nav 시작 -->
-		<nav class="navbar navbar-inverse">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#myNavbar">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">GroupWare</a>
-				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 1-1</a></li>
-								<li><a href="#">Page 1-2</a></li>
-								<li><a href="#">Page 1-3</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Page 2 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 2-1</a></li>
-								<li><a href="#">Page 2-2</a></li>
-								<li><a href="#">Page 2-3</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Page 3 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 3-1</a></li>
-								<li><a href="#">Page 3-2</a></li>
-								<li><a href="#">Page 3-3</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Page 4 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 4-1</a></li>
-								<li><a href="#">Page 4-2</a></li>
-								<li><a href="#">Page 4-3</a></li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">Page 5 <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Page 5-1</a></li>
-								<li><a href="#">Page 5-2</a></li>
-								<li><a href="#">Page 5-3</a></li>
-							</ul></li>
-					</ul>
-
-					<form class="navbar-form navbar-right">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search">
-							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-					
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-								Profile</a></li>
-					</ul>
-
-				</div>
-			</div>
-		</nav>
+		
 		<!-- nav 종료 -->
 
 
