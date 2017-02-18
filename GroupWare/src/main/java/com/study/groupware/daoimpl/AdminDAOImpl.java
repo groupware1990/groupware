@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.study.groupware.dao.AdminDAO;
+import com.study.groupware.vo.OfficerVO;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -43,5 +44,13 @@ public class AdminDAOImpl implements AdminDAO {
 		return session.selectList(namespace + ".selectDpt_Div_Tb");
 	}
 	
-	
+	@Override
+	public int selectStf_Sq(Map params) throws Exception {
+		return session.selectOne(namespace + ".selectStf_Sq", params);
+	}
+
+	@Override
+	public void officerInsert(OfficerVO vo) throws Exception {
+		session.insert(namespace + ".officerInsert", vo);
+	}
 }

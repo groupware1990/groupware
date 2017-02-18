@@ -34,6 +34,7 @@
 }
 </style>
 
+
 </head>
 <body>
 	<div id="wrap">
@@ -46,13 +47,17 @@
 
 		<!-- nav 시작 -->
 		<div>
-			<c:import url="../import/nav_admin.jsp" />
+			<c:import url="../import/nav.jsp" />
 		</div>
 		<!-- nav 종료 -->
 
 
 		<!-- content 시작 -->
 		<div id="content">
+		
+			
+			
+			
 			
 		</div>
 		<!-- content 종료 -->

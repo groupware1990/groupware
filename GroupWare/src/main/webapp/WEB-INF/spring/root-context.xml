@@ -43,6 +43,12 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
+	<!-- 파일 업로드 경로 설정 -->
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="C:\\Users\\Administrator\\git\\groupware\\GroupWare\\src\\main\\webapp\\resources\\img\\">
+		</constructor-arg>
+	</bean>
+
 	<context:component-scan base-package="com.study.groupware.controller"></context:component-scan>
 	<context:component-scan base-package="com.study.groupware.dao"></context:component-scan>
 	<context:component-scan base-package="com.study.groupware.daoimpl"></context:component-scan>

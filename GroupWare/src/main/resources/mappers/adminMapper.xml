@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</otherwise>
 		</choose>
 		
-		ORDER BY RNK.RNK_SQ DESC
+		ORDER BY DD.DPT_SQ ASC, RNK.RNK_SQ DESC
 	</select>
 
 	<select id="officerListCount" parameterType="Map" resultType="Map">
@@ -64,17 +64,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAdmn_Tb" parameterType="Map" resultType="Map">
 		SELECT ADMN_SQ, ADMN_PW
 		FROM ADMN_TB
+		ORDER BY ADMN_SQ
 	</select>
 	
 	<select id="selectRnk_Tb" parameterType="Map" resultType="Map">
 		SELECT RNK_SQ, RNK_NM
 		FROM RNK_TB
+		ORDER BY RNK_SQ
 	</select>
 	
 	<select id="selectDpt_Div_Tb" parameterType="Map" resultType="Map">
 		SELECT DPT_SQ, DPT_NM
 		FROM DPT_DIV_TB
+		ORDER BY DPT_SQ
 	</select>
-
+	
+	<select id="selectStf_Sq" parameterType="Map" resultType="int">
+		SELECT COUNT(*) AS CNT
+		FROM STF_TB
+		WHERE STF_SQ = #{stf_sq}
+	</select>
+	
+	<insert id="officerInsert" parameterType="OfficerVO">
+		INSERT INTO STF_TB 
+		VALUES (#{stf_sq}, #{admn_sq}, #{dpt_sq}, #{rnk_sq}, #{stf_nm}, CRYPTPACK.ENCRYPT(#{stf_pw}, 'admin'), #{stf_ph}, #{stf_cm_add}, #{stf_dt_add}, #{stf_bs_ph}, #{stf_eml}, #{stf_ent}, SYSDATE, SYSDATE, #{stf_pt_rt}, #{stf_pt_nm})
+	</insert>
+	
+	
 
 </mapper>

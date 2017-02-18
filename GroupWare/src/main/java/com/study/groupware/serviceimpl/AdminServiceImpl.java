@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.groupware.dao.AdminDAO;
 import com.study.groupware.service.AdminService;
+import com.study.groupware.vo.OfficerVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -15,13 +16,13 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO dao;
 
 	@Override
-	public List officerList(Map param) throws Exception {
-		return dao.officerList(param);
+	public List officerList(Map params) throws Exception {
+		return dao.officerList(params);
 	}
 	
 	@Override
-	public Map<String, Object> officerListCount(Map param) throws Exception {
-		return dao.officerListCount(param);
+	public Map<String, Object> officerListCount(Map params) throws Exception {
+		return dao.officerListCount(params);
 	}
 
 	@Override
@@ -38,6 +39,14 @@ public class AdminServiceImpl implements AdminService {
 	public List selectDpt_Div_Tb() throws Exception {
 		return dao.selectDpt_Div_Tb();
 	}
-	
-	
+		
+	@Override
+	public int selectStf_Sq(Map params) throws Exception {
+		return dao.selectStf_Sq(params);
+	}
+
+	@Override
+	public void officerInsert(OfficerVO vo) throws Exception {
+		dao.officerInsert(vo);
+	}
 }
