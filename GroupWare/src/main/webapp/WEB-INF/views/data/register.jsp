@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>게시글 등록</title>
+<title>자료실 등록</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -15,7 +15,6 @@
 
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>  <!--스마트에디터 -->
 
 <style type="text/css">
 /* Remove the navbar's default rounded borders and increase the bottom margin */
@@ -37,8 +36,6 @@
 			<c:import url="../import/header_officer.jsp" />
 		</div>
 		<!-- header 종료 -->
-
-
 		<!-- nav 시작 -->
 		<div>
 			<c:import url="../import/nav.jsp" />
@@ -46,17 +43,15 @@
 		
 		<!-- nav 종료 -->
 
-
-		<!-- content 시작 -->
-
 	
 
-	<form role="form" method="post" id="frm" action="/sboard/register">
+	<form role="form" method="post" id="frm" action="/data/register">
 	<div class ="box-body">
-		<input type="text" name='ntc_nm' class="form-control" placeholder="제목을 입력해 주세요.">
-        <textarea name="ntc_cnt" id="ntc_cnt" rows="10" cols="100"></textarea>
+		<input type="text" name='data_nm' class="form-control" placeholder="제목을 입력해 주세요.">
+        <input type="text" name='data_cnt' class="form-control" placeholder="내용을 입력해 주세요.">
         <input type="text" name='stf_sq' class="form-control" placeholder="사원번호">
-        <input type="text" name='ntc_div_sq' class="form-control" placeholder="게시판구분번호">
+        <input type="text" name='data_pl_nm' class="form-control" placeholder="파일명">
+        <input type="text" name='data_crs' class="form-control" placeholder="파일경로">
 	</div>
 
    <div class="box-footer">
@@ -85,20 +80,19 @@
 		alert("처리가 완료되었습니다.");
 	}
 </script>
+ 
 
+    <script type="text/javascript">
+    	$(document).ready(function() {
+			$("#cancel").click(function() {
+				location.href="/data/dataList";
+			});
+		});
+    </script>
 <script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-    oAppRef: oEditors,
-    elPlaceHolder: "ntc_cnt",
-    sSkinURI: "/resources/se2/SmartEditor2Skin.html",
-    fCreator: "createSEditor2"
-});
+
 //전송버튼 클릭이벤트
 $("#okbutton").click(function(){
-
-    //id가 smarteditor인 textarea에 에디터에서 대입
-   oEditors.getById["ntc_cnt"].exec("UPDATE_CONTENTS_FIELD", []);
    
    //폼 submit
    $("#frm").submit();
@@ -106,14 +100,5 @@ $("#okbutton").click(function(){
  
 
 </script>
-
-    <script type="text/javascript">
-    	$(document).ready(function() {
-			$("#cancel").click(function() {
-				location.href="/sboard/list?ntc_div_sq=1";
-			});
-		});
-    </script>
-
 </html>
 

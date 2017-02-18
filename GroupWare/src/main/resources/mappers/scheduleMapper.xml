@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.groupware.mapper.ScheduleMapper">
+
+	<insert id="create">
+		INSERT INTO BS_SCD_TB (
+		bs_scd_sq,
+		scd_sq,
+		stf_sq,
+		bs_scd_nm,
+		bs_scd_dt,
+		bs_scd_cnt
+	    )
+		VALUES(SEQ_BS_SCD.NEXTVAL,#{scd_sq},#{stf_sq},#{bs_scd_nm},#{bs_scd_dt},#{bs_scd_cnt})
+	</insert>
+
+	<select id="read" parameterType="Map" resultType="ScheduleVO">
+		SELECT
+		*
+		FROM
+		SCD_VW
+		WHERE bs_scd_sq = #{bs_scd_sq}
+	</select>
+
+	<update id="update">
+		update ntc_tb set ntc_nm =#{ntc_nm}, ntc_cnt
+		=#{ntc_cnt}
+		where ntc_sq = #{ntc_sq}
+	</update>
+
+	<delete id="delete">
+		delete from ntc_tb where ntc_sq = #{ntc_sq}
+	</delete>
+
+
+
+	<select id="listAll" resultType="com.study.groupware.vo.ScheduleVO">
+         <![CDATA[
+
+         SELECT
+            *
+          FROM 
+        SCD_VW
+       WHERE scd_sq =#{scd_sq}
+
+ 
+]]>
+</select>
+
+<select id="sclist" resultType="com.study.groupware.vo.ScheduleVO">
+	<![CDATA[
+		SELECT DIV_APV_SQ, DIV_APV_NM
+		FROM DIV_APV_TB
+	]]>
+	</select>
+
+</mapper>

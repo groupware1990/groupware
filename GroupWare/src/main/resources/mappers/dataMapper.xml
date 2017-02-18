@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.study.groupware.mapper.DataMapper">
+
+<insert id="create">
+		INSERT INTO DATA_TB (
+		data_sq,
+	    stf_sq,
+		data_nm,
+		data_cnt,
+		data_hits,
+		data_dt,
+		data_mod,
+		data_crs,
+		data_pl_nm)
+		VALUES(SEQ_DATA.NEXTVAL,#{stf_sq},#{data_nm},#{data_cnt},0,SYSDATE,SYSDATE,#{data_crs},#{data_pl_nm})
+	</insert>
+
+	<select id="read" resultType="DataVO">
+		SELECT
+		data_sq,
+		data_nm,
+		stf_nm,
+		data_dt,
+		data_pl_nm,
+		data_crs,
+		data_cnt
+		FROM
+		DATA_VW
+		WHERE data_sq =#{data_sq}
+	</select>
+
+	<update id="update">
+		UPDATE data_tb SET
+		data_nm =#{data_nm},
+		data_cnt=#{data_cnt}
+		WHERE data_sq = #{data_sq}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM DATA_TB
+		WHERE DATA_SQ = #{DATA_SQ}
+	</delete>
+
+
+
+	<select id="listAll" resultType="com.study.groupware.vo.DataVO">
+ 		<![CDATA[
+
+   SELECT
+    DATA_SQ,
+    DATA_NM,
+    STF_NM,
+    DATA_DT,
+    DATA_HITS
+   
+   FROM
+   DATA_VW
+   WHERE DATA_SQ >0
+
+  
+ ]]>
+	</select>
+	
+		<update id="updateViewCnt">
+		UPDATE DATA_TB SET DATA_HITS = DATA_HITS +1 
+		WHERE DATA_SQ = #{DATA_SQ}
+	</update>
+	
+
+</mapper>

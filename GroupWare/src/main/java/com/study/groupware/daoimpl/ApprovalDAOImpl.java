@@ -1,6 +1,7 @@
 package com.study.groupware.daoimpl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -24,8 +25,8 @@ public class ApprovalDAOImpl implements ApprovalDAO {
   }
 
   @Override
-  public ApprovalVO read(String apv_sq) throws Exception {
-    return session.selectOne(namespace + ".read", apv_sq);
+  public ApprovalVO read(Map param) throws Exception {
+    return session.selectOne(namespace + ".read", param);
   }
 
   @Override
@@ -39,9 +40,15 @@ public class ApprovalDAOImpl implements ApprovalDAO {
   }
 
   @Override
-  public List<ApprovalVO> listAll(String div_apv_sq) throws Exception {
+  public List<ApprovalVO> listAll(int div_apv_sq) throws Exception {
     return session.selectList(namespace + ".listAll",div_apv_sq);
   }
+  
+  @Override
+ 	public List<ApprovalVO> aplist() throws Exception
+ 	{
+ 		return session.selectList(namespace + ".aplist");
+ 	}
 
   
 

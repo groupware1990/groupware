@@ -4,7 +4,7 @@ public class ApprovalVO {
 	
 	
 	private String apv_sq;
-	private String div_apv_sq;    
+	private int div_apv_sq;    
 	private String stf_sq;
 	private String stf_mid_sq;
 	private String stf_fnl_sq;
@@ -16,6 +16,7 @@ public class ApprovalVO {
 	private String div_apv_nm;
 	private String apv_ok;
 	private String stf_nm;
+	private String mid_nm;
 	
 	public String getApv_sq() {
 		return apv_sq;
@@ -23,10 +24,10 @@ public class ApprovalVO {
 	public void setApv_sq(String apv_sq) {
 		this.apv_sq = apv_sq;
 	}
-	public String getDiv_apv_sq() {
+	public int getDiv_apv_sq() {
 		return div_apv_sq;
 	}
-	public void setDiv_apv_sq(String div_apv_sq) {
+	public void setDiv_apv_sq(int div_apv_sq) {
 		this.div_apv_sq = div_apv_sq;
 	}
 	public String getStf_sq() {
@@ -95,16 +96,20 @@ public class ApprovalVO {
 	public void setStf_nm(String stf_nm) {
 		this.stf_nm = stf_nm;
 	}
+	public String getMid_nm() {
+		return mid_nm;
+	}
+	public void setMid_nm(String mid_nm) {
+		this.mid_nm = mid_nm;
+	}
 	@Override
 	public String toString() {
 		return "ApprovalVO [apv_sq=" + apv_sq + ", div_apv_sq=" + div_apv_sq + ", stf_sq=" + stf_sq + ", stf_mid_sq="
 				+ stf_mid_sq + ", stf_fnl_sq=" + stf_fnl_sq + ", apv_ok_sq=" + apv_ok_sq + ", apv_nm=" + apv_nm
 				+ ", apv_pl_rt=" + apv_pl_rt + ", apv_pl_nm=" + apv_pl_nm + ", apv_no=" + apv_no + ", div_apv_nm="
-				+ div_apv_nm + ", apv_ok=" + apv_ok + ", stf_nm=" + stf_nm + "]";
+				+ div_apv_nm + ", apv_ok=" + apv_ok + ", stf_nm=" + stf_nm + ", mid_nm=" + mid_nm + "]";
 	}
 	
-	
-
 	
 	
 

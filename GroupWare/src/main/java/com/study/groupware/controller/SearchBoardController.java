@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.study.groupware.service.BoardService;
+import com.study.groupware.service.NtcReplyService;
 import com.study.groupware.vo.BoardVO;
 
 @Controller
@@ -22,6 +23,9 @@ public class SearchBoardController {
 
 	@Inject
 	private BoardService service;
+	
+	@Inject
+	private NtcReplyService service1;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listAll(@RequestParam int ntc_div_sq, Model model) throws Exception {
@@ -39,6 +43,7 @@ public class SearchBoardController {
 			throws Exception {
 
 		model.addAttribute(service.read(ntc_sq));
+		model.addAttribute("list", service1.listReply(ntc_sq));            //게시판 댓글 리스트 가져오기
 	}
 
 	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
@@ -48,7 +53,7 @@ public class SearchBoardController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/sboard/list";
+		return "redirect:/sboard/list?ntc_div_sq=1";
 	}
 
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -61,13 +66,15 @@ public class SearchBoardController {
 	public String modifyPagingPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
 
 		logger.info(toString());
+		
 		service.modify(board);
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
+		
 
 		logger.info(rttr.toString());
 
-		return "redirect:/sboard/list";
+		return "redirect:/sboard/list?ntc_div_sq=1";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

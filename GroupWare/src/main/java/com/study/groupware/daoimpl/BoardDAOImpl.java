@@ -27,7 +27,7 @@ public class BoardDAOImpl implements BoardDAO {
   public BoardVO read(String ntc_sq) throws Exception {
     return session.selectOne(namespace + ".read", ntc_sq);
   }
-
+ 
   @Override
   public void update(BoardVO vo) throws Exception {
     session.update(namespace + ".update", vo);

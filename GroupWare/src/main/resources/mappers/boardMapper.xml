@@ -6,26 +6,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.study.groupware.mapper.BoardMapper">
 
 	<insert id="create">
-		insert into ntc_tb (NTC_SQ,STF_SQ,NTC_DIV_SQ,NTC_NM,NTC_CNT,NTC_DT,NTC_HITS)
-		values(SEQ_NTC.NEXTVAL,#{stf_sq},#{ntc_div_sq},#{ntc_nm},#{ntc_cnt},SYSDATE,0)
+		INSERT INTO NTC_TB (
+		ntc_sq,
+		stf_sq,
+		ntc_div_sq,
+		ntc_nm,
+		ntc_cnt,
+		ntc_dt,
+		ntc_hits)
+		VALUES(SEQ_NTC.NEXTVAL,#{stf_sq},#{ntc_div_sq},#{ntc_nm},#{ntc_cnt},SYSDATE,0)
 	</insert>
 
 	<select id="read" resultType="BoardVO">
-		select
-         ntc_sq,ntc_nm,ntc_dt,stf_nm,ntc_div_nm,ntc_cnt,ntc_div_sq
-		from
-		ntc_vw
-		where ntc_sq = #{ntc_sq}
+		SELECT
+		ntc_sq,
+		ntc_nm,
+		ntc_dt,
+		stf_nm,
+		ntc_div_nm,
+		ntc_cnt,
+		ntc_div_sq
+		FROM
+		NTC_VW
+		WHERE ntc_sq = #{ntc_sq}
 	</select>
-	
+
 	<update id="update">
-		update ntc_tb set ntc_nm =#{ntc_nm}, ntc_cnt
-		=#{ntc_cnt}
-		where ntc_sq = #{ntc_sq}
+		UPDATE NTC_TB SET
+		ntc_nm =#{ntc_nm},
+		ntc_cnt=#{ntc_cnt}
+		WHERE ntc_sq = #{ntc_sq}
 	</update>
 
 	<delete id="delete">
-		delete from ntc_tb where ntc_sq = #{ntc_sq}
+		DELETE FROM NTC_TB
+		WHERE ntc_sq = #{ntc_sq}
 	</delete>
 
 
@@ -33,21 +48,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listAll" resultType="com.study.groupware.vo.BoardVO">
  		<![CDATA[
 
-select 
-   ntc_sq,ntc_nm, ntc_cnt,ntc_dt,stf_nm,ntc_hits,ntc_div_nm,ntc_div_sq
-   from 
-   ntc_vw
-   where ntc_div_sq =#{ntc_div_sq}
+   SELECT
+    ntc_sq,
+    ntc_nm,
+    ntc_cnt,
+    ntc_dt,
+    stf_nm,
+    ntc_hits,
+    ntc_div_nm,
+    ntc_div_sq
+   FROM
+   NTC_VW
+   WHERE ntc_div_sq =#{ntc_div_sq}
 
   
  ]]>
 	</select>
 
-	
+
 
 
 	<update id="updateViewCnt">
-		update ntc_tb set ntc_hits = ntc_hits +1 where ntc_sq = #{ntc_sq}
+		update ntc_tb set ntc_hits = ntc_hits +1 where ntc_sq
+		= #{ntc_sq}
 	</update>
 
 

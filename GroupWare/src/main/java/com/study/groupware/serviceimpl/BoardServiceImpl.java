@@ -35,7 +35,6 @@ public class BoardServiceImpl implements BoardService {
     return dao.read(ntc_sq);
   }
 
-
   @Transactional
   @Override
   public void modify(BoardVO board) throws Exception {

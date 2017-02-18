@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>게시판 수정</title>
+<title>자료실 수정</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -46,18 +46,18 @@ margin: auto; /* 화면 중앙에 배치*/
 			    <c:import url="../import/nav.jsp" />
 		    </div>
 		
-		<form role="form" method="post" id="frm" action="/sboard/modifyPage">
-		         <input type='hidden' name='ntc_sq' value="${boardVO.ntc_sq}"> 
-			     <input type='hidden' name='ntc_div_sq' value="${boardVO.ntc_div_sq}"> 
+		<form role="form" method="post" id="frm" action="/data/modifyPage">
+		         <input type='hidden' name='data_sq' value="${dataVO.data_sq}"> 
+			 
 					
 			<div id="content">
 
 				<div class="box-body">
 					<div class="form-group">
-						<input type="text" name='ntc_nm' class="form-control" value="${boardVO.ntc_nm}">
+						<input type="text" name='data_nm' class="form-control" value="${dataVO.data_nm}">
 					</div>
 					<div class="form-group">
-					<textarea name="ntc_cnt" id="ntc_cnt" rows="10" cols="100">${boardVO.ntc_cnt}</textarea>
+					<textarea name="data_cnt" id="data_cnt" rows="10" cols="100">${dataVO.data_cnt}</textarea>
 					</div>
 				</div>
 			</div>
@@ -87,22 +87,11 @@ margin: auto; /* 화면 중앙에 배치*/
 </script>
 
 
-<script type="text/javascript">
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef : oEditors,
-		elPlaceHolder : "ntc_cnt",
-		sSkinURI : "/resources/se2/SmartEditor2Skin.html",
-		fCreator : "createSEditor2"
-	});
-</script>
+
 
 <script>
 $("#okbutton").click(function(){
 
-    //id가 smarteditor인 textarea에 에디터에서 대입
-   oEditors.getById["ntc_cnt"].exec("UPDATE_CONTENTS_FIELD", []);
-   
    //폼 submit
    $("#frm").submit();
 })
@@ -111,7 +100,7 @@ $("#okbutton").click(function(){
 <script type="text/javascript">
     	$(document).ready(function() {
 			$("#cancel").click(function() {
-				location.href="/sboard/list?ntc_div_sq=1";
+				location.href="/date/dateList";
 			});
 		});
     </script>

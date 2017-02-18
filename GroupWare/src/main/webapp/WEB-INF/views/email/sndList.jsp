@@ -178,7 +178,7 @@ form {
 	<div id="wrap">
 		<!-- header 시작 -->
 		<div>
-			<c:import url="../import/header_admin.jsp" />
+			<c:import url="../import/header_officer.jsp" />
 		</div>
 		<!-- header 종료 -->
 
@@ -189,116 +189,12 @@ form {
 		</div>
 		<!-- nav 종료 -->
 
-		<!-- Modal 시작 -->
-		<div class="modal fade" id="insertModal" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">구성원 추가</h4>
-					</div>
-					<div class="modal-body">
-						
-						<table class="table table-striped table-bordered">
-							<colgroup>
-								<col width="30%" />
-								<col width="70%" />
-							</colgroup>
-							<thead>
-							</thead>
-							<tbody>
-								<tr>
-									<th class="text-center">
-										<img src="/resources/img/user.png">
-										<input type="file" class="form-control">
-									</th>
-									<td><input type="text" class="form-control" placeholder="이름"></td>
-								</tr>
-								<tr>
-									<th>이름(*)</th>
-									<td><input type="text" id="stf_nm" class="form-control" placeholder="이름"></td>
-								</tr>
-								<tr>
-									<th>비밀번호(*)</th>
-									<td><input type="password" id="stf_pw" class="form-control" placeholder="비밀번호"></td>
-								</tr>
-								<tr>
-									<th>사원번호(*)</th>
-									<td><input type="text" id="stf_sq" class="form-control" placeholder="사원번호"></td>
-								</tr>
-								<tr>
-									<th>권한(*)</th>
-									<td>
-										<select id="admn_sq" class="form-control">
-											<c:forEach items="${selectAdmn_Tb}" var="map">
-												<option value="${map.ADMN_SQ}">${map.ADMN_PW}</option>
-											</c:forEach>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th>부서(*)</th>
-									<td>
-										<select id="dpt_sq" class="form-control">
-											<c:forEach items="${selectDpt_Div_Tb}" var="map">
-												<option value="${map.DPT_SQ}">${map.DPT_NM}</option>
-											</c:forEach>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th>직급(*)</th>
-									<td>
-										<select id="rnk_sq" class="form-control">
-											<c:forEach items="${selectRnk_Tb}" var="map">
-												<option value="${map.RNK_SQ}">${map.RNK_NM}</option>
-											</c:forEach>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th>주소(*)</th>
-									<td><input type="text" id="stf_cm_add"  class="form-control" placeholder="주소" onclick="addrSearch();"></td>
-								</tr>
-								<tr>
-									<th>상세주소(*)</th>
-									<td><input type="text" id="stf_dt_add"  class="form-control" placeholder="상세주소"></td>
-								</tr>
-								<tr>
-									<th>이메일(*)</th>
-									<td><input type="email" id="stf_eml" class="form-control" placeholder="이메일"></td>
-								</tr>
-								
-								<tr>
-									<th>휴대폰(*)</th>
-									<td><input type="text" id="stf_ph" class="form-control" placeholder="휴대폰"></td>
-								</tr>
-								<tr>
-									<th>내선번호</th>
-									<td><input type="text" id="stf_bs_ph" class="form-control" placeholder="내선번호"></td>
-								</tr>
-								<tr>
-									<th>입사일(*)</th>
-									<td><input type="date" id="stf_ent" class="form-control" placeholder="입사일"></td>
-								</tr>
-							</tbody>
-						</table>
-					
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-success" data-dismiss="modal">입력</button>
-						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Modal 종료 -->
 
 		<!-- content 시작 -->
 		<div id="content">
 			<div id="title">
-				<h3>구성원 관리</h3>
-				구성원, 조직을 추가하거나 정보를 수정할 수 있습니다.
+				<h3>보낸편지함</h3>
+				
 			</div>
 
 			<div>
@@ -306,76 +202,43 @@ form {
 				<div id="leftMenu" class="col-sm-4 col-md-3">
 					<div id="leftTop">
 						<h4>
-							<label>조직도</label>
+							<label>편지함카테고리</label>
 						</h4>
 						<button type="button" class="btn btn-default pull-right">관리</button>
-						<button type="button" class="btn btn-default pull-right">추가</button>
 					</div>
-					<div>조직도가 되려나</div>
+				
 				</div>
 				<!-- 우측매뉴 -->
 				<div id="rightMenu" class="col-sm-14 col-md-9">
 					<form id="rightTop" class="form-inline">
-						<button type="button" id="officerInsert" class="btn btn-success" data-toggle="modal"
-							data-target="#insertModal">구성원 추가</button>
-						<button type="button" class="btn btn-warning" data-toggle="modal"
-							data-target="#updateModal">구성원 수정</button>
-						<!-- <button type="button" class="btn btn-danger">구성원 삭제</button> -->
-
-						<button type="button" id="search"
-							class="btn btn-primary pull-right">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-						<input id="keyword" type="text" class="form-control pull-right"
-							placeholder="구성원 검색"> <select id="cate"
-							class="form-control pull-right">
-							<option value="1">이름</option>
-							<option value="2">직급</option>
-							<option value="3">부서</option>
-						</select>
+							
 					</form>
 					<div id="rightBottom">
-						<div>
-							<label>전체 : </label> <span id="userCount">${officerListCount.COUNT}</span>명
-						</div>
+						
 						<div class="table-responsive">
 							<table id="officerList" class="table table-hover">
 								<colgroup>
-									<col width="5%" />
-									<col width="96px" />
-									<col width="10%" />
-									<col width="10%" />
-									<col width="10%" />
-									<col width="10%" />
-									<col width="15%" />
-									<col width="15%" />
-									<col width="15%" />
+									<col width="30px" />
+									<col width="250px" />
+									<col width="60px" />
+									<col width="100px" />
 								</colgroup>
 								<thead>
 									<tr class="active">
-										<th>선택</th>
-										<th>사진</th>
+								     	<th>번호</th>
+										<th>제목</th>
 										<th>이름</th>
-										<th>직급</th>
-										<th>조직</th>
-										<th>권한</th>
-										<th>핸드폰번호</th>
-										<th>내선번호</th>
-										<th>이메일</th>
+										<th>발송시간</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${officerList}" var="map">
+									<c:forEach items="${sndList}" var="emailVO">
 										<tr valign="middle">
-											<td><input type="checkbox" class="check" value="${STF.STF_SQ}"></td>
-											<td><img src="${map.STF_PT_RT}" /></td>
-											<td>${map.STF_NM}</td>
-											<td>${map.RNK_NM}</td>
-											<td>${map.DPT_NM}</td>
-											<td>${map.ADMN_PW}</td>
-											<td>${map.STF_PH}</td>
-											<td>${map.STF_BS_PH}</td>
-											<td>${map.STF_EML}</td>
+										 	<td>${emailVO.snd_eml_sq}</td> 
+											<td>${emailVO.eml_nm}</td>
+											<td>${emailVO.stf_nm}</td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+											value="${emailVO.snd_dt}"/></td>
 										</tr>
 									</c:forEach>
 								</tbody>

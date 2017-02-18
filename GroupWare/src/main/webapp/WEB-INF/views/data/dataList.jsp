@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>게시판</title>
+<title>자료실</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -63,7 +63,7 @@
 				<div class='box'></div>
 
 				<div class="box">
-					<h3 class="box-title">게시판</h3>
+					<h3 class="box-title">자료실</h3>
 					<div class="regButton">
 						<button id='newBtn'>등록</button>
 					</div>
@@ -78,15 +78,15 @@
 								<th style="width: 80px">조회수</th>
 							</tr>
 
-							<c:forEach items="${list}" var="boardVO">
+							<c:forEach items="${list}" var="dataVO">
 
 								<tr>
-									<td>${boardVO.ntc_sq}</td>
-									<td><a href='/sboard/read?ntc_sq=${boardVO.ntc_sq}'>${boardVO.ntc_nm}</a></td>
-									<td>${boardVO.stf_nm}</td>
+									<td>${dataVO.data_sq}</td>
+									<td><a href='/data/read?data_sq=${dataVO.data_sq}'>${dataVO.data_nm}</a></td>
+									<td>${dataVO.stf_nm}</td>
 									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${boardVO.ntc_dt}" /></td>
-									<td><span class="badge bg-red">${boardVO.ntc_hits}</span></td>
+											value="${dataVO.data_dt}" /></td>
+									<td><span class="badge bg-red">${dataVO.data_hits}</span></td>
 								</tr>
 
 							</c:forEach>
