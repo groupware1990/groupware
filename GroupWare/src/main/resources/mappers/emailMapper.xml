@@ -48,10 +48,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 		eml_sq,
 		eml_pl_nm,
+		eml_pl_crs,
 		eml_nm,
 		stf_nm,
 		eml_cnt,
-		rcv_dt
+		to_char(rcv_dt,'YYYY-MM-DD HH24:MI:SS') as rcv_dt
 		FROM
 		EML_RCV_VW
 		WHERE eml_sq = #{eml_sq}
@@ -63,9 +64,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE eml_sq = #{eml_sq}
 	</update>
 
-	<delete id="delete">
+	<delete id="delete" parameterType="Map">
 		DELETE FROM EML_RCV_TB
-		WHERE eml_sq = #{eml_sq}
+		WHERE eml_sq = #{eml_sq} 
+	
 	</delete>
 
 
@@ -100,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    
     from
    eml_rcv_vw
-   where stf_rcv_sq=#{stf_rcv_sq}
+   where stf_rcv_sq=#{stf_rcv_sq} and ipt_sq =1
 
   
  ]]>

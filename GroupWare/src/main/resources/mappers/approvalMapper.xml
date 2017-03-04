@@ -19,23 +19,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 	<select id="read" parameterType="Map" resultType="ApprovalVO">
-	    select
-	   apv_sq,
-	   apv_pl_nm,
-	   apv_nm,
-	   stf_nm,
-	   mid_nm,
-	   apv_ok,
-	   div_apv_nm
+		select
+		apv_sq,
+		apv_pl_nm,
+		apv_nm,
+		stf_nm,
+		mid_nm,
+		apv_ok,
+		div_apv_nm
 		from
 		apv_vw
 		where apv_sq = #{apv_sq}
 	</select>
 
-	<update id="update">
-		update ntc_tb set ntc_nm =#{ntc_nm}, ntc_cnt
-		=#{ntc_cnt}
-		where ntc_sq = #{ntc_sq}
+	<update id="update" parameterType="Map">
+		update apv_tb set apv_ok_sq =#{apv_ok_sq}
+		where apv_sq = #{apv_sq}
 	</update>
 
 	<delete id="delete">
@@ -47,26 +46,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listAll" resultType="com.study.groupware.vo.ApprovalVO">
          <![CDATA[
 
-SELECT 
-   APV_SQ,
-   APV_NM,
-   STF_NM,
-   DIV_APV_NM,
-   APV_OK,
-   DIV_APV_SQ
-FROM 
-   APV_VW
-   WHERE DIV_APV_SQ =#{DIV_APV_SQ}
-
-  
+       SELECT 
+       apv_sq,
+       apv_nm,
+       stf_nm,
+       div_apv_nm,
+       apv_ok,
+       div_apv_sq,
+       apv_ok_sq
+       FROM 
+       apv_vw
+       WHERE div_apv_sq =#{div_apv_sq}
  ]]>
 	</select>
 
-	<select id="aplist" resultType="com.study.groupware.vo.ApprovalVO">
-		<![CDATA[
-			SELECT SCD_SQ, SCD_NM
-			FROM SCD_DIV_TB
-		]]>
-	</select>
+
 
 </mapper>

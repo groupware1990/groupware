@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>구성원 관리</title>
+<title>보낸편지함</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -65,111 +65,53 @@ form {
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		/* 사원 검색 */
-		$("#search").on("click", function() {
-			if ($("#keyword").val() == "") {
-				alert("검색어를 최소 1글자 이상 입력해주세요.");
-			}
-			else if ($("#keyword").val() != "")
-				officerListSearch();
-		});
 		
-		/* 입사일 자동 입력 */
-		$("#officerInsert").on("click", function() {
-			var date = new Date();
-			
-			var yyyy = date.getFullYear();
-			var mm = (date.getMonth() + 1)
-			var dd = date.getDate();
-			
-			if (mm < 10) {
-				mm = "0" + mm;
-			}
-			if (dd < 10) {
-				dd = "0" + dd;
-			}
-			
-			date = yyyy + "-" + mm + "-" + dd;
-						
-			$("#stf_ent").val(date);
-		});
 		
-		/* 한글 입력 방지 */
-		$("#stf_eml, #stf_sq").on("keyup", function() {
-			$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,""));
+		$(".eml_snd_rd").on("click", function() {
+
+			var eml = $(this).attr("data-value");
+			 sndEmailRead(eml);
 		});
-		
-		/* 최대 입력 방지 */
-		$("#stf_sq").on("keyup", function() {
-			if ($(this).val().length > 10) {
-				$(this).val($(this).val().substring(0, 10));	
-			}
-		});
-		
-		$("#stf_dt_add").on("keyup", function() {
-			if ($(this).val().length > 33) {
-				$(this).val($(this).val().substring(0, 10));	
-			}
-		});
+
+
+
+		function sndEmailRead(eml) {
+			var params = {
+				eml_sq : eml
+			};
+			$.ajax({
+				url : "/email/emailRead",
+				dataType : "json",
+				type : "POST",
+				contentType: "application/json; charset=UTF-8",
+				data : JSON.stringify(params), 
+				beforeSend : function() { 
+
+					$("#eml_pl_nm1").val(""); 
+					$("#eml_nm1").val(""); 
+					$("#rcv_dt1").val(""); 
+				},
+				success : function(data) { 
+					console.log(data);
+
+				 var eml_pl_nm = data.eml_pl_nm;
+				 var eml_nm = data.eml_nm;
+				 var eml_cnt = data.eml_cnt;
+				 var rcv_dt = data.rcv_dt;
+				 
+				 $("#eml_pl_nm1").text(eml_pl_nm); 
+				 $("#eml_nm1").text(eml_nm); 
+				 $("#eml_cnt1").text(eml_cnt); 
+				 $("#rcv_dt1").text(rcv_dt); 
+				},
+
+				error : function(request, status, error) {
+					alert("list search fail :: error code: "+ request.status + "\n" + "error message: "+ error + "\n");
+				}
+			});
+		}
+
 	});
-	
-	/* 사원 검색 */
-	function officerListSearch() {
-		
-		var params = {
-				cate : $("#cate").val(),
-				keyword : $("#keyword").val()
-		};
-		
-		$.ajax({
-			url: "/admin/officerListSearch",
-			type: "POST",
-			dataType: "json",
-		    data : JSON.stringify(params),
-		    contentType: "application/json; charset=UTF-8",
-		    beforeSend : function() {
-		    	$("#userCount").empty();
-		    	$("#officerList > tbody").empty();
-		    },
-		    success: function(data) {
-		    	
-		    	var officerListCount = data.officerListCount;
-		    	var officerList = data.officerList;
-		    
-		    	$("#userCount").html(officerListCount.COUNT);
-		    	
-		    	var tbody = $("#officerList > tbody");
-		    	
-		    	$.each(officerList, function(idx, val) {
-		    		tbody.append(
-	    				$('<tr>').append($('<td>', {html : "<input type='radio' class='radio' value='"+val.STF_SQ+"'>"}))
-	    						 .append($('<td>', {html : "<img src='"+val.STF_PT_RT+"' />"}))
-	    						 .append($('<td>', {text : val.STF_NM}))
-	    						 .append($('<td>', {text : val.RNK_NM}))
-	    						 .append($('<td>', {text : val.DPT_NM}))
-	    						 .append($('<td>', {text : val.ADMN_PW}))
-	    						 .append($('<td>', {text : val.STF_PH}))
-	    						 .append($('<td>', {text : val.STF_BS_PH}))
-	    						 .append($('<td>', {text : val.STF_EML}))
-	    			);
-		    	});	
-		    },
-		    error: function(request, status, error) {
-		    	alert("list search fail :: error code: " + request.status + "\n" + "error message: " + error + "\n");
-		    }
-		});	
-	}
-	
-	/* 다음 주소 API */
-	function addrSearch() {
-		 new daum.Postcode({
-		        oncomplete: function(data) {
-		            var str = "[" + data.zonecode + "] " + data.address 
-		        	$("#stf_cm_add").val(str);
-		            $("#addrSub").focus();
-		        }
-		    }).open();
-	}
 	 
 </script>
 
@@ -233,12 +175,11 @@ form {
 								</thead>
 								<tbody>
 									<c:forEach items="${sndList}" var="emailVO">
-										<tr valign="middle">
-										 	<td>${emailVO.snd_eml_sq}</td> 
-											<td>${emailVO.eml_nm}</td>
+										<tr class="eml_snd_rd" data-value="${emailVO.eml_sq}" valign="middle">
+										 	<td>${emailVO.eml_sq}</td> 
+											<td><a href="#" data-toggle="modal" data-target="#readModal">${emailVO.eml_nm}</a></td>
 											<td>${emailVO.stf_nm}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${emailVO.snd_dt}"/></td>
+											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${emailVO.snd_dt}"/></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -249,6 +190,56 @@ form {
 			</div>
 		</div>
 		<!-- content 종료 -->
+		
+		<!-- 조회모달 시작 -->
+
+		<div class="modal fade" id="readModal" role="dialog">
+
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">메일조회창</h4>
+					</div>
+					<div class="modal-body">
+
+						<table class="table table-striped table-bordered">
+							<colgroup>
+								<col width="30%" />
+								<col width="70%" />
+							</colgroup>
+
+							<tbody>
+								<tr>
+									<th>파일이름</th>
+									<td id="eml_pl_nm1">${emailVO.eml_pl_nm}</td>
+								</tr>
+								<tr>
+									<th>제목</th>
+									<td id="eml_nm1">${emailVO.eml_nm}</td>
+								</tr>
+								<tr>
+									<th>내용</th>
+									<td><textarea id="eml_cnt1" readonly="readonly" rows="10" style=width:100%>${emailVO.eml_cnt}</textarea></td>
+								</tr>
+								<tr>
+									<th>받은시간</th>
+									<td id="rcv_dt1"><fmt:formatDate
+											pattern="yyyy-MM-dd HH:mm" value="${emailVO.rcv_dt}" /></td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 조회모달 종료 -->
 
 
 		<!-- footer 시작 -->

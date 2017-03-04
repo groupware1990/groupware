@@ -11,13 +11,11 @@ public interface ApprovalDAO {
 
 	  public ApprovalVO read(Map param) throws Exception;
 
-	  public void update(ApprovalVO vo) throws Exception;
+	  public ApprovalVO update(Map param) throws Exception;
 
 	  public void delete(String apv_sq) throws Exception;
 
 	  public List<ApprovalVO> listAll(int div_apv_sq) throws Exception;
-	  
-	  public List<ApprovalVO> aplist() throws Exception;
-
+	 
 
 }

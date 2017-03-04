@@ -44,22 +44,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
+    <select id="count" resultType="int">
+	    SELECT COUNT(*)AS CNT
+	    FROM NTC_VW
+	    WHERE ntc_div_sq=#{ntc_div_sq}
+    
+    </select>
 
-	<select id="listAll" resultType="com.study.groupware.vo.BoardVO">
+
+	<select id="listAll" parameterType="com.study.groupware.vo.BoardVO" resultType="com.study.groupware.vo.BoardVO">
  		<![CDATA[
 
-   SELECT
-    ntc_sq,
-    ntc_nm,
-    ntc_cnt,
-    ntc_dt,
-    stf_nm,
-    ntc_hits,
-    ntc_div_nm,
-    ntc_div_sq
-   FROM
-   NTC_VW
-   WHERE ntc_div_sq =#{ntc_div_sq}
+  SELECT B.*
+FROM
+  (SELECT ROWNUM AS RNUM ,A.*
+     FROM(SELECT
+          ntc_sq,
+          ntc_nm,
+          ntc_cnt,
+          ntc_dt,
+          stf_nm,
+          ntc_hits,
+          ntc_div_nm,
+          ntc_div_sq
+         FROM
+         NTC_VW
+         WHERE ntc_div_sq = #{ntc_div_sq} ORDER BY ntc_sq ASC)A
+    WHERE ROWNUM>=#{startCount})B
+WHERE B.RNUM<#{endCount}
+         ORDER BY RNUM DESC
 
   
  ]]>

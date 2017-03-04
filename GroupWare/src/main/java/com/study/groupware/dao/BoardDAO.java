@@ -14,9 +14,11 @@ public interface BoardDAO {
 
   public void delete(String ntc_sq) throws Exception;
 
-  public List<BoardVO> listAll(int ntc_div_sq) throws Exception;
+  public List<BoardVO> listAll(BoardVO board) throws Exception;
 
   public void updateViewCnt(String ntc_sq)throws Exception;
+  
+  public int count(int ntc_div_sq)throws Exception;
 
  
 	

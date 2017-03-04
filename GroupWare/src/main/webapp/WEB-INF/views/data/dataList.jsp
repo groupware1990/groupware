@@ -65,11 +65,11 @@
 				<div class="box">
 					<h3 class="box-title">자료실</h3>
 					<div class="regButton">
-						<button id='newBtn'>등록</button>
+						<button type="button" class="btn btn-primary" id='newBtn'>등록</button>
 					</div>
 					<div class="box-body">
 
-						<table class="table table-bordered">
+						<table class="table table-striped">
 							<tr>
 								<th style="width: 50px">번호</th>
 								<th>제목</th>

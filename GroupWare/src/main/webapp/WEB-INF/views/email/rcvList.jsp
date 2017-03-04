@@ -6,7 +6,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
-<title>받은메일함</title>
+<title>받은편지함</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -17,18 +17,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <style type="text/css">
-/* Remove the navbar's default rounded borders and increase the bottom margin */
-.navbar {
-	margin-bottom: 50px;
-	border-radius: 0;
-}
 
-/* Remove the jumbotron's default bottom margin */
-.jumbotron {
-	margin-bottom: 0;
-}
-
-/* Add a gray background color and some padding to the footer */
 #footer {
 	margin-top: 50px;
 	background-color: #f2f2f2;
@@ -64,8 +53,6 @@ form {
 
 <script type="text/javascript">
 	
-
-	
 	$(document).ready(function () {
 
 		$("#okbutton").click(function(){
@@ -73,54 +60,48 @@ form {
 		   $("#frm").submit();
 		});
 		
-		
-		
-		
-		
 		/*체크박스 클릭했을때 eml_sq 값을 가져옴*/
 		$(".eml_rm").on("click", function() {
 			var eml = $(this).attr("data-value");
 			
 			 $("#div1").val(eml);
+			 console.log(eml);
 		});
-		
-		
 		
 		/*보관처리*/
 		$("#emlKeep").on("click", function() {
 			    
 			var eml = $("#div1").val();
 			emailKeep(eml);
-			
 		          });
-		
 		
 		function emailKeep(eml) {
 
 			var params = {
 				eml_sq : eml
-				
 			};
 			
 			$.ajax({
 				url: "/email/emailKeep",
 				type: "POST",
-				dataType: "json",
+				dataType: "text",
 			    data : JSON.stringify(params),
-			    contentType: "application/json; charset=UTF-8"
-			 
+			    contentType: "application/json; charset=UTF-8",
+			    success: function(result) {
+				    if(result=='SUCCESS'){
+				    	alert("보관함으로 이동하었습니다");
+				    	window.location.reload();
+				    }
+			    }
 			});
-			
 		}
 
-		
 		
 		/*메일 삭제*/
 		$("#emlRemove").on("click", function() {
 			var eml = $("#div1").val();
 			emailRemove(eml);
 		});
-		
 		
 		function emailRemove(eml) {
 
@@ -140,15 +121,10 @@ form {
 			    	window.location.reload();
 			   	
 			    }
-			    
-			    
 			    }
 			});
-			
 		}
 
-		
-	
 		/* 메일 조회 */ 
 		$(".eml_rd").on("click", function() {
 			var eml = $(this).attr("data-value");   //attr도 map과 같은 구조인데 키값만 넣으면 그 값을 갖고 오라는 뜻
@@ -174,37 +150,35 @@ form {
 			    	$("#eml_cnt1").empty();
 			    	$("#stf_nm1").empty();
 			    	$("#rcv_dt1").empty();
+			    	$("#eml_pl_crs1").empty();
+			    	
 			    	
 			    },
 			    success: function(data) {
-			    	console.log(data);
-			    	
+			    
 			    	var eml_pl_nm = data.eml_pl_nm;
 			    	var eml_nm = data.eml_nm;
 			        var eml_cnt = data.eml_cnt;
 			    	var stf_nm = data.stf_nm;
 			    	var rcv_dt = data.rcv_dt;
-			    	
+			    	var eml_pl_crs = data.eml_pl_crs;
 			    	
 			    	$("#eml_pl_nm1").text(eml_pl_nm);
 			    	$("#eml_nm1").text(eml_nm);
 			 	    $("#eml_cnt1").text(eml_cnt);
 			    	$("#stf_nm1").text(stf_nm);
 			    	$("#rcv_dt1").text(rcv_dt);
+			    	$("#eml_pl_crs1").text(eml_pl_crs);
 			    
-			    	
 			    },
 			    error: function(request, status, error) {
 			    	alert("list search fail :: error code: " + request.status + "\n" + "error message: " + error + "\n");
 			    }
 			});	
 		}
+		
+		
 
-
-		
-		
-		
-		
 		
 		}); 
 </script>
@@ -224,7 +198,6 @@ form {
 			<c:import url="../import/header_admin.jsp" />
 		</div>
 		<!-- header 종료 -->
-
 
 		<!-- nav 시작 -->
 		<div>
@@ -268,8 +241,9 @@ form {
 									</tr>
 									<tr>
 										<th>내용(*)</th>
-										<td><input type="text" id="eml_cnt" name="eml_cnt"
-											class="form-control" placeholder="내용을 입력해 주세요."></td>
+										<td>
+										<textarea id="eml_cnt" name="eml_cnt" rows="5"
+											class="form-control" placeholder="내용을 입력해 주세요."></textarea></td>
 									</tr>
 									<tr>
 										<th>받는사원번호(*)</th>
@@ -321,8 +295,7 @@ form {
 						<button type="button" id="emlRemove" class="btn btn-danger">편지삭제</button>
 						<button type="button" id="emlKeep" class="btn btn-warning">보관하기</button>
 
-						<button type="button" id="search"
-							class="btn btn-primary pull-right">
+						<button type="button" id="search" class="btn btn-primary pull-right">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 						<input id="keyword" type="text" class="form-control pull-right"
@@ -335,7 +308,7 @@ form {
 					</form>
 					<div id="rightBottom">
 					          <form role="form"> 											
-					                     <input id='div1' type='text' value="${emailVO.eml_sq}">
+					                     <input id='div1' type='hidden' value="${emailVO.eml_sq}">
 				              </form>
 
 						<div class="table-responsive">
@@ -356,15 +329,13 @@ form {
 								</thead>
 								<tbody>
 									<c:forEach items="${rcvList}" var="emailVO">
-										<tr class="eml_rd" data-value="${emailVO.eml_sq}"
-											valign="middle">
+										<tr class="eml_rd" data-value="${emailVO.eml_sq}" valign="middle">
 											<td class="eml_rm" data-value="${emailVO.eml_sq}"><input type="checkbox" class="check"
-												value="${emailVO.eml_sq}"></td>
+												 value="${emailVO.eml_sq}"></td>
 											<td><a href='#' data-toggle="modal"
 												data-target="#readModal">${emailVO.eml_nm}</a></td>
 											<td>${emailVO.stf_nm}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-													value="${emailVO.rcv_dt}" /></td>
+											<td>${emailVO.rcv_dt}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -377,14 +348,13 @@ form {
 		<!-- content 종료 -->
 
 		<!-- 조회모달 시작 -->
-
 		<div class="modal fade" id="readModal" role="dialog">
 
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">메일조회창</h4>
+						<h4 class="modal-title">편지조회</h4>
 					</div>
 					<div class="modal-body">
 
@@ -405,7 +375,8 @@ form {
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td id="eml_cnt1">${emailVO.eml_cnt}</td>
+									<td><textarea id="eml_cnt1" readonly="readonly" rows="10" style=width:100%;>
+									${emailVO.eml_cnt}</textarea><td>
 								</tr>
 								<tr>
 									<th>보낸사람</th>
@@ -413,8 +384,11 @@ form {
 								</tr>
 								<tr>
 									<th>받은시간</th>
-									<td id="rcv_dt1"><fmt:formatDate
-											pattern="yyyy-MM-dd HH:mm" value="${emailVO.rcv_dt}" /></td>
+									<td id="rcv_dt1">${emailVO.rcv_dt}</td>
+								</tr>	
+								<tr>
+									<th>첨부파일</th>
+									<td id="eml_pl_crs1"><a href="#">${emailVO.eml_pl_crs}</a></td>
 								</tr>
 
 							</tbody>

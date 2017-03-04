@@ -22,13 +22,12 @@
 
 	
 #content {
-width: 70%;
 margin: auto; /* 화면 중앙에 배치*/
 font-size : 120%;
-width : 800px;
+width : 830px;
 }
 #bfooter{
-margin: auto; /* 화면 중앙에 배치*/
+text-align: center; /* 화면 중앙에 배치*/
 
 }
 

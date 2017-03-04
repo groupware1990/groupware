@@ -17,7 +17,7 @@
 <style type="text/css">
 /* Remove the navbar's default rounded borders and increase the bottom margin */
 .box {
-	width: 70%;
+	width: 65%;
 	margin: auto; /* 화면 중앙에 배치*/
 }
 
@@ -47,7 +47,7 @@
 
 
 		<!-- nav 시작 -->
-	    <div>
+		<div>
 			<c:import url="../import/nav.jsp" />
 		</div>
 		<!-- nav 종료 -->
@@ -65,36 +65,41 @@
 				<div class="box">
 					<h3 class="box-title">게시판</h3>
 					<div class="regButton">
-						<button id='newBtn'>등록</button>
+						<button type="button" class="btn btn-primary" id='newBtn'>새글등록</button>
 					</div>
 					<div class="box-body">
 
-						<table class="table table-bordered">
-							<tr>
-								<th style="width: 50px">번호</th>
-								<th>제목</th>
-								<th style="width: 120px">작성자</th>
-								<th style="width: 200px">작성일</th>
-								<th style="width: 80px">조회수</th>
-							</tr>
-
-							<c:forEach items="${list}" var="boardVO">
-
+						<table class="table table-hover">
+							<thead>
 								<tr>
-									<td>${boardVO.ntc_sq}</td>
-									<td><a href='/sboard/read?ntc_sq=${boardVO.ntc_sq}'>${boardVO.ntc_nm}</a></td>
-									<td>${boardVO.stf_nm}</td>
-									<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-											value="${boardVO.ntc_dt}" /></td>
-									<td><span class="badge bg-red">${boardVO.ntc_hits}</span></td>
+									<th style="width: 50px">번호</th>
+									<th>제목</th>
+									<th style="width: 120px">작성자</th>
+									<th style="width: 200px">작성일</th>
+									<th style="width: 80px">조회수</th>
 								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${list}" var="boardVO">
 
-							</c:forEach>
+									<tr>
+										<td>${boardVO.ntc_sq}</td>
+										<td><a href='/sboard/read?ntc_sq=${boardVO.ntc_sq}'>${boardVO.ntc_nm}</a></td>
+										<td>${boardVO.stf_nm}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
+												value="${boardVO.ntc_dt}" /></td>
+										<td><span class="badge bg-red">${boardVO.ntc_hits}</span></td>
+									</tr>
 
+								</c:forEach>
+							</tbody>
 						</table>
 
 					</div>
 
+					<div>
+						${pageIndexList}
+					</div>
 				</div>
 				<!-- /.box-footer-->
 			</div>

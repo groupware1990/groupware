@@ -39,8 +39,8 @@ public class ApprovalServiceImpl implements ApprovalService {
 
   @Transactional
   @Override
-  public void modify(ApprovalVO approval) throws Exception {
-	  dao.update(approval);
+  public ApprovalVO modify(Map param) throws Exception {
+	  return dao.update(param);
    
     }
   
@@ -54,14 +54,6 @@ public class ApprovalServiceImpl implements ApprovalService {
   public List<ApprovalVO> listAll(int div_apv_sq) throws Exception {
     return dao.listAll(div_apv_sq);
   }
-
-
-  @Override
-	public List<ApprovalVO> aplist() throws Exception
-	{
-		return dao.aplist();
-	}
-  
   
 
 

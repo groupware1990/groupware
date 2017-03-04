@@ -9,7 +9,7 @@ public class EmailVO {
 	private int stf_rcv_sq;     //받은사원번호
 	private String eml_nm;         //편지제목
 	private Date snd_dt;         //송신시간
-	private Date rcv_dt;         //수신시간
+	private String rcv_dt;         //수신시간
 	private String eml_cnt;        //이메일 내용
 	private String ipt_nm;         //편지중요도
 	private int ipt_sq;         //중요번호(키)
@@ -50,10 +50,10 @@ public class EmailVO {
 	public void setSnd_dt(Date snd_dt) {
 		this.snd_dt = snd_dt;
 	}
-	public Date getRcv_dt() {
+	public String getRcv_dt() {
 		return rcv_dt;
 	}
-	public void setRcv_dt(Date rcv_dt) {
+	public void setRcv_dt(String rcv_dt) {
 		this.rcv_dt = rcv_dt;
 	}
 	public String getEml_cnt() {
@@ -113,6 +113,7 @@ public class EmailVO {
 	}
     
     
+	
     
 	
 }

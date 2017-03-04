@@ -11,12 +11,12 @@ public interface ApprovalService {
 
 	  public ApprovalVO read(Map param) throws Exception;
 
-	  public void modify(ApprovalVO Approval) throws Exception;
+	  public ApprovalVO modify(Map param) throws Exception;
 
 	  public void remove(String apv_sq) throws Exception;
 
 	  public List<ApprovalVO> listAll(int div_apv_sq) throws Exception;
 
-	  public List<ApprovalVO> aplist() throws Exception;
+	
 	
 }

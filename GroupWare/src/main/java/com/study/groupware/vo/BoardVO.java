@@ -13,6 +13,8 @@ public class BoardVO {
 	private String ntc_hits;
 	private int ntc_div_sq;
 	private String ntc_div_nm;
+	private int startCount;
+	private int endCount;
 	public String getNtc_sq() {
 		return ntc_sq;
 	}
@@ -67,12 +69,27 @@ public class BoardVO {
 	public void setNtc_div_nm(String ntc_div_nm) {
 		this.ntc_div_nm = ntc_div_nm;
 	}
+	public int getStartCount() {
+		return startCount;
+	}
+	public void setStartCount(int startCount) {
+		this.startCount = startCount;
+	}
+	public int getEndCount() {
+		return endCount;
+	}
+	public void setEndCount(int endCount) {
+		this.endCount = endCount;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [ntc_sq=" + ntc_sq + ", ntc_nm=" + ntc_nm + ", ntc_cnt=" + ntc_cnt + ", stf_sq=" + stf_sq
 				+ ", stf_nm=" + stf_nm + ", ntc_dt=" + ntc_dt + ", ntc_hits=" + ntc_hits + ", ntc_div_sq=" + ntc_div_sq
-				+ ", ntc_div_nm=" + ntc_div_nm + "]";
+				+ ", ntc_div_nm=" + ntc_div_nm + ", startCount=" + startCount + ", endCount=" + endCount + "]";
 	}
+	
+	
+	
 	
 
 }

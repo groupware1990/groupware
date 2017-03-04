@@ -82,7 +82,11 @@ public class DataVO {
 				+ ", data_cnt=" + data_cnt + ", data_hits=" + data_hits + ", data_dt=" + data_dt + ", data_mod="
 				+ data_mod + ", data_crs=" + data_crs + ", data_pl_nm=" + data_pl_nm + "]";
 	}
-
+	
+	
+	
+	
+	
 	
 	
 	

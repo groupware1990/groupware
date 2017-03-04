@@ -19,11 +19,20 @@
 
 <style type="text/css">
 /* Remove the navbar's default rounded borders and increase the bottom margin */
+.box {
+	width: 50%;
+	margin: auto; /* 화면 중앙에 배치*/
+}
+
+
 .box-body {
 	
 	margin: auto; /* 화면 중앙에 배치*/
 	width : 730px;
 	}
+.bfooter {
+	float: right;
+}
 
 
 </style>
@@ -59,7 +68,7 @@
         <input type="text" name='ntc_div_sq' class="form-control" placeholder="게시판구분번호">
 	</div>
 
-   <div class="box-footer">
+   <div class="bfooter">
 		<button type="button" id="okbutton" class="btn btn-primary">확인</button>
 		<button id="cancel" type="button" class="btn btn-danger">취소</button>
    </div>

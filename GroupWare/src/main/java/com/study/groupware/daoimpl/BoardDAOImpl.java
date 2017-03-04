@@ -39,8 +39,8 @@ public class BoardDAOImpl implements BoardDAO {
   }
 
   @Override
-  public List<BoardVO> listAll(int ntc_div_sq) throws Exception {
-    return session.selectList(namespace + ".listAll",ntc_div_sq);
+  public List<BoardVO> listAll(BoardVO board) throws Exception {
+    return session.selectList(namespace + ".listAll",board);
   }
 
   
@@ -50,6 +50,12 @@ public class BoardDAOImpl implements BoardDAO {
     session.update(namespace+".updateViewCnt", ntc_sq);
     
   }
+  
+  @Override
+  public int count(int ntc_div_sq) throws Exception {
+    return session.selectOne(namespace + ".count", ntc_div_sq);
+  }
+ 
 
 
   

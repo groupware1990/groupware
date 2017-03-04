@@ -30,8 +30,8 @@ public class ApprovalDAOImpl implements ApprovalDAO {
   }
 
   @Override
-  public void update(ApprovalVO vo) throws Exception {
-    session.update(namespace + ".update", vo);
+  public ApprovalVO update(Map param) throws Exception {
+    return session.selectOne(namespace + ".update", param);
   }
 
   @Override
@@ -43,13 +43,6 @@ public class ApprovalDAOImpl implements ApprovalDAO {
   public List<ApprovalVO> listAll(int div_apv_sq) throws Exception {
     return session.selectList(namespace + ".listAll",div_apv_sq);
   }
-  
-  @Override
- 	public List<ApprovalVO> aplist() throws Exception
- 	{
- 		return session.selectList(namespace + ".aplist");
- 	}
-
   
 
 }

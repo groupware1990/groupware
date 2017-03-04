@@ -5,22 +5,22 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import com.study.groupware.dao.NtcReplyDAO;
+import com.study.groupware.dao.DataReplyDAO;
+import com.study.groupware.vo.DataReplyVO;
 import com.study.groupware.vo.NtcReplyVO;
 
 @Repository
-public class NtcReplyDAOImpl implements NtcReplyDAO {
+public class DataReplyDAOImpl implements DataReplyDAO {
 
   @Inject
   private SqlSession session;
 
-  private static String namespace = "com.study.groupware.mapper.NtcReplyMapper";
+  private static String namespace = "com.study.groupware.mapper.DataReplyMapper";
 
   @Override
-  public NtcReplyVO create(Map param) throws Exception {
+  public DataReplyVO create(Map param) throws Exception {
    return session.selectOne(namespace + ".create", param);
   }
- 
 
   @Override
   public void delete(Map param) throws Exception {
@@ -28,19 +28,21 @@ public class NtcReplyDAOImpl implements NtcReplyDAO {
   }
 
   @Override
-  public List<NtcReplyVO> listAll(String ntc_sq) throws Exception {
-    return session.selectList(namespace + ".listAll",ntc_sq);
+  public List<DataReplyVO> listAll(int data_sq) throws Exception {
+    return session.selectList(namespace + ".listAll",data_sq);
   }
-
+  
   @Override
-  public NtcReplyVO read(Map param) throws Exception {
+  public DataReplyVO read(Map param) throws Exception {
     return session.selectOne(namespace + ".read", param);
   }
   
 
   @Override
-  public NtcReplyVO update(Map param) throws Exception {
+  public DataReplyVO update(Map param) throws Exception {
     return session.selectOne(namespace + ".update", param);
   }
+
+
 
 }

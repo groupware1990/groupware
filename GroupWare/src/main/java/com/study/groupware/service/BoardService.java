@@ -14,9 +14,9 @@ public interface BoardService {
 
   public void remove(String ntc_sq) throws Exception;
 
-  public List<BoardVO> listAll(int ntc_div_sq) throws Exception;
+  public List<BoardVO> listAll(BoardVO board) throws Exception;
 
-  
+  public int count(int ntc_div_sq) throws Exception;
 
 
  

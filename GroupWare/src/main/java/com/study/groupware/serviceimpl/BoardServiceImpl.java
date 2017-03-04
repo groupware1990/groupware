@@ -49,11 +49,15 @@ public class BoardServiceImpl implements BoardService {
   } 
 
   @Override
-  public List<BoardVO> listAll(int ntc_div_sq) throws Exception {
-    return dao.listAll(ntc_div_sq);
+  public List<BoardVO> listAll(BoardVO board) throws Exception {
+    return dao.listAll(board);
   }
 
-  
+ 
+  @Override
+  public int count(int ntc_div_sq) throws Exception {
+    return dao.count(ntc_div_sq);
+  }
   
 
 

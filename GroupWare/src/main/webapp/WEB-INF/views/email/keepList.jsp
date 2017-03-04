@@ -79,7 +79,7 @@ form {
 		/*체크박스 클릭했을 때*/
 		$(".eml_rm").on("click", function() {
 			var eml = $(this).attr("data-value");
-			
+		 	console.log(eml);
 			 $("#div1").val(eml);
 		});
 		
@@ -109,17 +109,19 @@ form {
 				    	alert("삭제되었습니다");
 				    	window.location.reload();
 			    
-			    
+				    }
+			    }
 			});
-			
-		}
-
 		
+			
+		
+
+		}
 	
 		/* 메일 조회 */ 
 		$(".eml_rd").on("click", function() {
-			var eml = $(this).attr("data-value");   //attr도 map과 같은 구조인데 키값만 넣으면 그 값을 갖고 오라는 뜻
-			
+			var eml = $(this).attr("data-value");
+			console.log(eml);
 			emailRead(eml);
 		});
 
@@ -132,7 +134,7 @@ form {
 			$.ajax({
 				url: "/email/emailRead",
 				type: "POST",
-				dataType: "text",
+				dataType: "json",
 			    data : JSON.stringify(params),
 			    contentType: "application/json; charset=UTF-8",
 			    beforeSend : function() {
@@ -153,11 +155,11 @@ form {
 			    	var rcv_dt = data.rcv_dt;
 			    	
 			    	
-			    	$("#eml_pl_nm").text(eml_pl_nm);
-			    	$("#eml_nm").text(eml_nm);
-			 	    $("#eml_cnt").text(eml_cnt);
-			    	$("#stf_nm").text(stf_nm);
-			    	$("#rcv_dt").text(rcv_dt);
+			    	$("#eml_pl_nm1").text(eml_pl_nm);
+			    	$("#eml_nm1").text(eml_nm);
+			 	    $("#eml_cnt1").text(eml_cnt);
+			    	$("#stf_nm1").text(stf_nm);
+			    	$("#rcv_dt1").text(rcv_dt);
 			    
 			    	
 			    },
@@ -279,16 +281,13 @@ form {
 					<form id="rightTop" class="form-inline">
 						<button type="button" id="emlRemove" class="btn btn-danger">편지삭제</button>
 
-						<button type="button" id="search"
-							class="btn btn-primary pull-right">
+						<button type="button" id="search" class="btn btn-primary pull-right">
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
-						<input id="keyword" type="text" class="form-control pull-right"
-							placeholder="구성원 검색"> <select id="cate"
-							class="form-control pull-right">
+						<input id="keyword" type="text" class="form-control pull-right" placeholder="구성원 검색"> 
+						<select id="cate" class="form-control pull-right">
 							<option value="1">이름</option>
 							<option value="2">제목</option>
-
 						</select>
 					</form>
 					<div id="rightBottom">
@@ -314,15 +313,12 @@ form {
 								</thead>
 								<tbody>
 									<c:forEach items="${keepList}" var="emailVO">
-										<tr class="eml_rd" data-value="${emailVO.eml_sq}"
-											valign="middle">
+										<tr class="eml_rd" data-value="${emailVO.eml_sq}" valign="middle">
 											<td class="eml_rm" data-value="${emailVO.eml_sq}"><input type="checkbox" class="check"
 												value="${emailVO.eml_sq}"></td>
-											<td><a href='#' data-toggle="modal"
-												data-target="#readModal">${emailVO.eml_nm}</a></td>
+											<td><a href='#' data-toggle="modal" data-target="#readModal">${emailVO.eml_nm}</a></td>
 											<td>${emailVO.stf_nm}</td>
-											<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
-													value="${emailVO.rcv_dt}" /></td>
+											<td>${emailVO.rcv_dt}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -363,7 +359,8 @@ form {
 								</tr>
 								<tr>
 									<th>내용</th>
-									<td id="eml_cnt1">${emailVO.eml_cnt}</td>
+									<td>
+									<textarea id="eml_cnt1" readonly="readonly" rows="10" style=width:100%;>${emailVO.eml_cnt}</textarea></td>
 								</tr>
 								<tr>
 									<th>보낸사람</th>
@@ -371,8 +368,7 @@ form {
 								</tr>
 								<tr>
 									<th>받은시간</th>
-									<td id="rcv_dt1"><fmt:formatDate
-											pattern="yyyy-MM-dd HH:mm" value="${emailVO.rcv_dt}" /></td>
+									<td id="rcv_dt1">${emailVO.rcv_dt}</td>
 								</tr>
 
 							</tbody>

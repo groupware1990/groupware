@@ -1,5 +1,6 @@
 package com.study.groupware.controller;
 
+import java.net.InetAddress;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -28,28 +29,34 @@ public class ScheduleController {
 
   @RequestMapping(value = "/scheduleList", method = RequestMethod.GET)
   public void listAll(@RequestParam int scd_sq, Model model) throws Exception {
+	  logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 
     logger.info(toString());
 
     model.addAttribute("scheduleList", service.listAll(scd_sq));  //model 을 이용해서 모든 게시물을 jsp로 전송
+    logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
     
   }
   
 
   @RequestMapping(value = "/read", method = RequestMethod.POST)
   public ScheduleVO read(@RequestBody Map<String, Object> param)throws Exception {
-
+	 
+	  logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 	  ScheduleVO vo = service.read(param);
+	  logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 	  return vo;
   }
 
   @RequestMapping(value = "/removePage", method = RequestMethod.POST)
   public String remove(@RequestParam("bs_scd_sq") int bs_scd_sq, RedirectAttributes rttr) throws Exception {
 
+	logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
     service.remove(bs_scd_sq);
 
 
     rttr.addFlashAttribute("msg", "SUCCESS");
+    logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 
     return "redirect:/schedule/scheduleList?scd_sq=1";
   }
@@ -75,22 +82,25 @@ public class ScheduleController {
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public void registGET(Model model) throws Exception {
-
+	  
+	logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
     logger.info("regist get ...........");
     
     model.addAttribute("sclist", service.sclist());
+    logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public String registPOST(ScheduleVO schedule, RedirectAttributes rttr) throws Exception {
 
+	logger.info("-------------start index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");  
     logger.info("regist post ...........");
     logger.info(schedule.toString());
 
     service.regist(schedule);
 
     rttr.addFlashAttribute("msg", "SUCCESS");
-   
+    logger.info("---------------end index [Connect IP : " + InetAddress.getLocalHost().getHostAddress() + "]");
 
     return "redirect:/schedule/scheduleList?scd_sq=1";
   }
