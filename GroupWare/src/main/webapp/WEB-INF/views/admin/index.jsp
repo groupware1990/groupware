@@ -32,6 +32,12 @@
 	background-color: #f2f2f2;
 	padding: 25px;
 }
+
+#content {
+	margin-left: 50px;
+	margin-right: 50px;
+	overflow: hidden;
+}
 </style>
 
 

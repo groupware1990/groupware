@@ -21,8 +21,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public Map<String, Object> officerListCount(Map params) throws Exception {
+	public int officerListCount(Map params) throws Exception {
 		return dao.officerListCount(params);
+	}
+	
+	@Override
+	public List selectStf_tb() throws Exception {
+		return dao.selectStf_tb();
 	}
 
 	@Override
@@ -48,5 +53,35 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void officerInsert(OfficerVO vo) throws Exception {
 		dao.officerInsert(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectUpdateOfficer(Map params) throws Exception {
+		return dao.selectUpdateOfficer(params);
+	}
+
+	@Override
+	public int officerUpdate(OfficerVO vo) throws Exception {
+		return dao.officerUpdate(vo);
+	}
+
+	@Override
+	public int deptInsert(Map params) throws Exception {
+		return dao.deptInsert(params);
+	}
+	
+	@Override
+	public int selectDeptNm(Map params) throws Exception {
+		return dao.selectDeptNm(params);
+	}
+
+	@Override
+	public int deptUpdate(Map params) throws Exception {
+		return dao.deptUpdate(params);
+	}
+
+	@Override
+	public int deptDelete(Map params) throws Exception {
+		return dao.deptDelete(params);
 	}
 }

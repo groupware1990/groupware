@@ -2,6 +2,7 @@ package com.study.groupware.vo;
 
 public class OfficerVO {
 	private String stf_sq, admn_sq, dpt_sq, rnk_sq, stf_nm, stf_pw, stf_ph, stf_cm_add, stf_dt_add, stf_bs_ph, stf_eml, stf_ent, stf_reg, stf_mod, stf_pt_rt, stf_pt_nm;
+	private String stf_sq_old;
 
 	public String getStf_sq() {
 		return stf_sq;
@@ -130,6 +131,23 @@ public class OfficerVO {
 	public void setStf_pt_nm(String stf_pt_nm) {
 		this.stf_pt_nm = stf_pt_nm;
 	}
+
+	public String getStf_sq_old() {
+		return stf_sq_old;
+	}
+
+	public void setStf_sq_old(String stf_sq_old) {
+		this.stf_sq_old = stf_sq_old;
+	}
+
+	@Override
+	public String toString() {
+		return "OfficerVO [stf_sq=" + stf_sq + ", admn_sq=" + admn_sq + ", dpt_sq=" + dpt_sq + ", rnk_sq=" + rnk_sq
+				+ ", stf_nm=" + stf_nm + ", stf_pw=" + stf_pw + ", stf_ph=" + stf_ph + ", stf_cm_add=" + stf_cm_add
+				+ ", stf_dt_add=" + stf_dt_add + ", stf_bs_ph=" + stf_bs_ph + ", stf_eml=" + stf_eml + ", stf_ent="
+				+ stf_ent + ", stf_reg=" + stf_reg + ", stf_mod=" + stf_mod + ", stf_pt_rt=" + stf_pt_rt
+				+ ", stf_pt_nm=" + stf_pt_nm + ", stf_sq_old=" + stf_sq_old + "]";
+	}
 	
-		
+	
 }

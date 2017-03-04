@@ -14,7 +14,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 <!-- ajaxForm -->
 <script src="http://malsup.github.com/min/jquery.form.min.js"></script>
 
@@ -126,39 +125,18 @@ form {
 	width: 167px;
 }
 
-#officerList > thead > tr > th, #officerList > tbody > tr > td {
-	text-align: center;
-}
-
 </style>
 
 <script type="text/javascript">
-	
 	$(document).ready(function() {
 		/* 사원 검색 */
 		$("#search").on("click", function() {
 			if ($("#keyword").val() == "") {
 				alert("검색어를 최소 1글자 이상 입력해주세요.");
 			} else if ($("#keyword").val() != "")
-				var params = {
-					cate : $("#cate").val(),
-					keyword : $("#keyword").val()
-				};
-			
-				officerListSearch(params);
+				officerListSearch();
 		});
-		
-		// Ajax 페이징 처리
-		$(document).on("click", "#pageIndexListAjax > li > a", function() {
-			var params = {
-					cate : $("#cate").val(),
-					keyword : $("#keyword").val(),
-					page : $(this).attr("data-page")
-				};
-			
-			officerListSearch(params);
-		});
-		
+	
 		/* 입사일 자동 입력 */
 		$("#officerInsertModal").on("click", function() {
 			var date = new Date();
@@ -486,7 +464,13 @@ form {
 	});
 
 	/* 사원 검색 */
-	function officerListSearch(params) {
+	function officerListSearch() {
+
+		var params = {
+			cate : $("#cate").val(),
+			keyword : $("#keyword").val()
+		};
+
 		$.ajax({
 			url : "/admin/officerListSearch",
 			type : "POST",
@@ -496,13 +480,11 @@ form {
 			beforeSend : function() {
 				$("#userCount").empty();
 				$("#officerList > tbody").empty();
-				$("#pageIndexList").empty();
 			},
 			success : function(data) {
 	
 				var officerListCount = data.officerListCount;
 				var officerList = data.officerList;
-				var pageIndexListAjax = data.pageIndexListAjax;
 	
 				$("#userCount").html(officerListCount);
 	
@@ -519,8 +501,6 @@ form {
 										  .append($('<td>',	{text : val.STF_BS_PH}))
 										  .append($('<td>',	{text : val.STF_EML})));
 				});
-				
-				$("#pageIndexList").html(pageIndexListAjax);
 			},
 			error : function(request, status, error) {
 				alert("list search fail :: error code: "
@@ -533,7 +513,7 @@ form {
 	// 사원번호 중복 검색
 	function selectStf_sq(data) {
 		var params = {
-			stf_sq : data
+			stf_sq : data,
 		};
 
 		$.ajax({
@@ -756,6 +736,33 @@ form {
 	}
 	
 	// 부서명 다시 가져오기
+	function deptList() {
+		$.ajax({
+			url : "/admin/selectDpt_Div_Tb",
+			type : "POST",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			beforeSend : function() {
+				$("#dpt_sq_dept").empty();
+			},
+			success : function(data) {
+				
+				var select = $("#dpt_sq_dept");
+				
+				$.each(data, function(idx, val) {
+					select.append($('<option>', {value : val.DPT_SQ, text : val.DPT_NM}))
+				});
+				
+			},
+			error : function(request, status, error) {
+				alert("list search fail :: error code: "
+						+ request.status + "\n" + "error message: "
+						+ error + "\n");
+			}
+		});
+	}
+	
+	// 부서명 다시 가져오기 (오버로딩)
 	function deptList(dpt_sq, dpt_nm) {
 		$.ajax({
 			url : "/admin/selectDpt_Div_Tb",
@@ -775,6 +782,8 @@ form {
 						div.append($('<div>', {"class" : "has-feedback"})
 						   .append($('<div>', {"class" : "deptDiv", "data-value" : val.DPT_SQ, text : val.DPT_NM}))
 						   .append($('<span>', {"class" : "glyphicon glyphicon-remove form-control-feedback small-icon"})))
+						
+						
 					}
 					else if (val.DPT_SQ == dpt_sq) {
 						div.append($('<input>', {type : "text", id : "deptNmUp", "data-value" : val.DPT_SQ, value : val.DPT_NM}))
@@ -860,6 +869,8 @@ form {
 		var params = {
 				dpt_sq : data
 			};
+		
+		console.log(params);
 		
 		$.ajax({
 			url : "/admin/deptDelete",
@@ -1355,7 +1366,7 @@ form {
 									<c:forEach items="${selectDpt_Div_Tb}" var="dptmap">
 										<li data-options="state:'closed'"><span>${dptmap.DPT_NM}</span>
 											<ul>
-												<c:forEach items="${selectStf_tb}" var="stfmap">
+												<c:forEach items="${officerList}" var="stfmap">
 													<c:if test="${dptmap.DPT_NM eq stfmap.DPT_NM}">
 														<li>[${stfmap.DPT_NM}/${stfmap.RNK_NM}]
 															${stfmap.STF_NM}</li>
@@ -1450,9 +1461,6 @@ form {
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
-						<div id="pageIndexList" class="text-center">
-							${pageIndexList }
 						</div>
 					</div>
 				</div>

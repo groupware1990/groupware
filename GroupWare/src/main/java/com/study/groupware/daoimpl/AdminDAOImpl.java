@@ -25,8 +25,13 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 	
 	@Override
-	public Map<String, Object> officerListCount(Map param) throws Exception {
+	public int officerListCount(Map param) throws Exception {
 		return session.selectOne(namespace + ".officerListCount", param);
+	}
+
+	@Override
+	public List selectStf_tb() throws Exception {
+		return session.selectList(namespace + ".selectStf_tb");
 	}
 
 	@Override
@@ -52,5 +57,35 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public void officerInsert(OfficerVO vo) throws Exception {
 		session.insert(namespace + ".officerInsert", vo);
+	}
+
+	@Override
+	public Map<String, Object> selectUpdateOfficer(Map params) throws Exception {
+		return session.selectOne(namespace + ".selectUpdateOfficer", params);
+	}
+	
+	@Override
+	public int officerUpdate(OfficerVO vo) throws Exception {
+		return session.update(namespace + ".officerUpdate", vo);
+	}
+
+	@Override
+	public int deptInsert(Map params) throws Exception {
+		return session.insert(namespace + ".deptInsert", params);
+	}
+	
+	@Override
+	public int selectDeptNm(Map params) throws Exception {
+		return session.selectOne(namespace + ".selectDeptNm", params);
+	}
+
+	@Override
+	public int deptUpdate(Map params) throws Exception {
+		return session.update(namespace + ".deptUpdate", params);
+	}
+
+	@Override
+	public int deptDelete(Map params) throws Exception {
+		return session.delete(namespace + ".deptDelete", params);
 	}
 }
